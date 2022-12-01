@@ -6,6 +6,9 @@ import Modal from "react-bootstrap/Modal";
 import Col from "react-bootstrap/Col";
 import Toast from "react-bootstrap/Toast";
 import { BACKEND_URL } from "../../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+
 class EditStudent extends Component {
   constructor(props) {
       super(props);
@@ -170,12 +173,12 @@ class EditStudent extends Component {
           <Modal.Footer></Modal.Footer>
         </Modal>
         <Button
-          className="mt-2 "
+          style={{marginLeft: '10px'}}
           variant="warning"
                 onClick={() => this.handleShowForm()}
                 size="sm"
         >
-          Modifier
+           <FontAwesomeIcon icon={faPenToSquare} />
         </Button>
       </div>
     );
