@@ -87,7 +87,7 @@ function Cow() {
                   <tr key = {index}>
                     <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
                     <td>{medical.sickeness} </td>
-                    <td> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh}/> <EditMedicalHistories cowId={cowId } id={medical.id} setRefresh={setRefresh} refresh={refresh}/></td> 
+                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh}/> <EditMedicalHistories cowId={cowId } id={medical.id} setRefresh={setRefresh} refresh={refresh}/></td> 
                   </tr>
                 );
               })}

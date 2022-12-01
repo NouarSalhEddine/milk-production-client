@@ -3,8 +3,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import CreateCowsComponent from "./components/CreateCowsComponent";
-import EditCows from "./components/edit-cows.component";
-import DeleteCows from "./components/delete-Cows.component";
+import EditCowsComponent from "./components/EditCowsComponent";
+import DeleteCowsComponent from "./components/DeleteCowsComponent";
 import { BACKEND_URL } from "../../config";
 import { Navigate, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
@@ -72,12 +72,12 @@ function Vaches() {
                     <td>{entryDate}</td>
                     <td>{cow.breed}</td>
                     <td className="d-flex justify-content-center align-items-center">
-                      <DeleteCows
-                        id={cow.id}
+                      <DeleteCowsComponent
                         setRefresh={setRefresh}
                         refresh={refresh}
+                        id={cow.id}
                       />
-                      <EditCows
+                      <EditCowsComponent
                         serialNumber={cow.serial_number}
                         entryDate={cow.entry_date}
                         breed={cow.breed}

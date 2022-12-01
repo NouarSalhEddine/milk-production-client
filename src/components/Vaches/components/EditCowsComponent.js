@@ -4,13 +4,21 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { BACKEND_URL } from "../../../config";
 import Modal from "react-bootstrap/Modal";
-
-function CreateCowsComponent({ refresh, setRefresh }) {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+function EditCowsComponent({
+  refresh,
+  setRefresh,
+  id,
+  serialNumber,
+  entryDate,
+  breed,
+}) {
   //  **************states*************
   const [cows, setCows] = useState({
-    serial_number: "",
-    entry_date: "",
-    breed: "",
+    serial_number: serialNumber,
+    entry_date: entryDate,
+    breed: breed,
   });
   // ************statesForm********
   const [show, setShow] = useState(false);
@@ -27,16 +35,15 @@ function CreateCowsComponent({ refresh, setRefresh }) {
   const onChangeBreed = (e) => {
     setCows({ ...cows, breed: e.target.value });
   };
-  
 
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
     const { serial_number, entry_date, breed } = cows;
-    const url = `${BACKEND_URL}/cows`;
+    const url = `${BACKEND_URL}/cows/${id}`;
 
     axios
-      .post(url, {
+      .put(url, {
         serial_number,
         entry_date: new Date(entry_date),
         breed,
@@ -66,13 +73,17 @@ function CreateCowsComponent({ refresh, setRefresh }) {
   //  **************axios*************
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        +
+      <Button
+        style={{ marginLeft: "10px" }}
+        variant="warning"
+        onClick={() => handleShow()}
+        size="sm"
+      >
+        <FontAwesomeIcon icon={faPenToSquare} />
       </Button>
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Ajouter Une Vache</Modal.Title>
+          <Modal.Title>Modifier</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
@@ -120,4 +131,4 @@ function CreateCowsComponent({ refresh, setRefresh }) {
   );
 }
 
-export default CreateCowsComponent;
+export default EditCowsComponent;
