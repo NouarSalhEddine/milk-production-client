@@ -93,7 +93,7 @@ function Cow() {
               <tr>
                 <th>Date de Diagnostic</th>
                 <th>Maladie</th>
-                <th>Actions</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -126,15 +126,15 @@ function Cow() {
         <Table striped>
             <thead>
               <tr>
-                <th>Date de Naissance</th>
-                <th>Actions</th>
+                <th className="text-center">Date de Naissance</th>
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {births.map((birth, index) => {
                 return (
                   <tr key = {index}>
-                    <td>{new Date(birth.birth_date).toLocaleDateString()}</td>
+                    <td  className="text-center">{new Date(birth.birth_date).toLocaleDateString()}</td>
                     
                     <td className="d-flex justify-content-center align-items-center">
                       <DeleteBirths id={birth.id} setRefresh={setRefresh} refresh={refresh} />

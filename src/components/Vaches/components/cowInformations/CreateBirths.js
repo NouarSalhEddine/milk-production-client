@@ -59,12 +59,12 @@ function CreateBirths({ cowId, refresh, setRefresh }) {
 
       <Modal  show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Ajouter visites medicale</Modal.Title>
+          <Modal.Title>Ajouter la date de naissance</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3">
-              <Form.Label>Date de Diagnostic</Form.Label>
+              <Form.Label>Date</Form.Label>
               <Form.Control value={births.date} onChange={handleChangeDate}  type="date"  />
             </Form.Group>
             <hr />
