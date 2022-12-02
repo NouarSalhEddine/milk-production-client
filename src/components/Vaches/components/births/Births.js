@@ -7,37 +7,28 @@ import { BACKEND_URL } from "../../../../config";
 import { useParams } from "react-router-dom";
 
 function Births() {
- // *********States*************
+  // *********States*************
 
- const [refresh, setRefresh] = useState(false);
- // const [id, setId] = useState('');
- const [births, setBirths] = useState([
-  {
-    id: "",
-    cow: "",
-    birth_date: "",
-    
-   },
+  const [refresh, setRefresh] = useState(false);
+  // const [id, setId] = useState('');
+  const [births, setBirths] = useState([
+    {
+      id: "",
+      cow: "",
+      birth_date: "",
+    },
   ]);
- 
 
   useEffect(() => {
-   
-   const url = `${BACKEND_URL}/births`;
-   axios.get(url).then((res) => {
-     setBirths(res.data);
-   });
-   
+    const url = `${BACKEND_URL}/births`;
+    axios.get(url).then((res) => {
+      setBirths(res.data);
+    });
+  }, []);
 
- }, []);
- 
-
-
- return (
-   <div>
-     
-    
-     <Card style={{ marginTop: "2rem" }}>
+  return (
+    <div>
+      <Card style={{ marginTop: "2rem" }}>
         <Card.Header
           style={{
             display: "flex",
@@ -46,40 +37,33 @@ function Births() {
           }}
         >
           Naissances
-          
         </Card.Header>
         <Card.Body>
-        <Table striped>
+          {births.length > 0 ? <Table striped>
             <thead>
               <tr>
-                <th >Date de Naissance</th>
+                <th>Date de Naissance</th>
                 <th className="text-center">Vaches</th>
               </tr>
             </thead>
             <tbody>
-             {
-               
-               births.map((birth, index) => {
-                 if (birth.cow.serial_number !== null || undefined) {
-                   
-                   return (
-                     <tr key = {index}>
-                       <td  style={{paddingLeft:"20px"}} >{new Date(birth.birth_date).toLocaleDateString()}</td>
-                       <td  className="text-center">{birth.cow.serial_number}</td>
-                       
-                     </tr>
-                   );
-                 }
+              {births.map((birth, index) => {
+                return (
+                  <tr key={index}>
+                    <td style={{ paddingLeft: "20px" }}>
+                      {new Date(birth.birth_date).toLocaleDateString()}
+                    </td>
+                    <td className="text-center">{birth.cow.serial_number}</td>
+                  </tr>
+                );
               })}
             </tbody>
-          </Table>
+          </Table> : <div style={{textAlign: 'center'}}>Aucune naissance disponible</div> }
+           
         </Card.Body>
       </Card>
-
-   
-    
-   </div>
- );
+    </div>
+  );
 }
 
-export default Births
+export default Births;

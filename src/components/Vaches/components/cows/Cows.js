@@ -46,12 +46,12 @@ function Cows() {
             alignItems: "center",
           }}
         >
-          Les Vaches
+          Cliquer sur la vache pour ajouter/modifier l'historique medicale ou naissances
           <CreateCowsComponent refresh={refresh} setRefresh={setRefresh} />
         </Card.Header>
         <Card.Body>
-          Cliquer sur la vache pour ajouter/modifier l'historique medicale ou naissances
-          <Table striped bordered hover style={{marginTop: '10px'}}>
+         
+          {addCows.length > 0 ?   <Table striped bordered hover style={{marginTop: '10px'}}>
             <thead>
               <tr>
                 <th>Numéro De Serie</th>
@@ -60,7 +60,7 @@ function Cows() {
                 <th>Actions</th>
               </tr>
             </thead>
-            <tbody>
+             <tbody>
               {addCows.map((cow, index) => {
                 const entryDate = new Date(cow.entry_date).toLocaleDateString();
                 return (
@@ -92,7 +92,7 @@ function Cows() {
                 );
               })}
             </tbody>
-          </Table>
+          </Table> : <div style={{textAlign: 'center'}}>Aucune vache disponible</div> }
         </Card.Body>
       </Card>
     </div>

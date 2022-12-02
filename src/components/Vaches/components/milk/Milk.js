@@ -48,7 +48,7 @@ function Milk() {
           <CreateMilk setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
-          <Table striped>
+       { milk.length > 0 ?  <Table striped>
             <thead>
               <tr>
                 <th>Date de Production</th>
@@ -70,7 +70,7 @@ function Milk() {
                 );
               })}
             </tbody>
-          </Table>
+          </Table>  : <div style={{textAlign: 'center'}}>Aucune production disponible</div> }
         </Card.Body>
       </Card>
 

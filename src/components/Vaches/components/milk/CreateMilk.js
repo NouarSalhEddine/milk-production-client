@@ -81,7 +81,7 @@ function CreateMilk({ id, refresh, setRefresh }) {
               <Form.Control
                 value={milk.quantity}
                 onChange={handleChangeQuantity}
-                type="text"
+                type="number"
               />
             </Form.Group>
             <hr />

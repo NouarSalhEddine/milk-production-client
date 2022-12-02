@@ -101,6 +101,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
             <Form.Group className="mb-3">
               <Form.Label>numero de serie :</Form.Label>
               <Form.Control
+               
                 onChange={onChangeSerialNumber}
                 type="number"
               />
@@ -108,6 +109,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
             <Form.Group controlId="dateEntry">
               <Form.Label>date d'entrer :</Form.Label>
               <Form.Control
+                
                 type="date"
                 onChange={onChangeDateEntry}
               />
@@ -116,7 +118,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
             <Form.Label>Races :</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={undefined}
+              
               onChange={onChangeBreed}
             >
               <option  >Selectionner la race</option>

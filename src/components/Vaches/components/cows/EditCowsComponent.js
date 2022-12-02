@@ -16,14 +16,23 @@ function EditCowsComponent({
 }) {
   //  **************states*************
   const [cows, setCows] = useState({
-    serial_number: serialNumber,
-    entry_date: entryDate,
-    breed: breed,
+    serial_number: "",
+    entry_date: "",
+    breed: "",
   });
+  
   // ************statesForm********
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false)
+  ;
+  const handleShow = () => {
+    setCows({
+      serial_number: serialNumber,
+      entry_date: entryDate,
+      breed: breed,
+    })
+    setShow(true)
+  };
   //  **************HandleFunction*************
 
   const onChangeSerialNumber = (e) => {
@@ -51,11 +60,7 @@ function EditCowsComponent({
       .then((response) => {
         refresh ? setRefresh(false) : setRefresh(true);
         console.log("refresh");
-        setCows({
-          serial_number: "",
-          entry_date: "",
-          breed: "",
-        });
+        
         if (response.status === 500) {
         } else if (response.status === 200 && response.data.status === 200) {
         } else if (response.status === 200 && response.data.status !== 200) {
@@ -72,7 +77,7 @@ function EditCowsComponent({
   };
   //  **************axios*************
 
-  const entryDateObj = new Date(entryDate)
+  const entryDateObj = new Date(cows.entry_date)
   const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth()}` : entryDateObj.getMonth()}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
   return (
     <div>
@@ -93,7 +98,7 @@ function EditCowsComponent({
             <Form.Group className="mb-3">
               <Form.Label>numero de serie :</Form.Label>
               <Form.Control
-                value={serialNumber}
+                value={cows.serial_number}
                 onChange={onChangeSerialNumber}
                 type="number"
               />
@@ -110,10 +115,10 @@ function EditCowsComponent({
             <Form.Label>Races :</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={breed}
+              value={cows.breed}
               onChange={onChangeBreed}
             >
-              <option disabled>Selectionner la race</option>
+              <option >Selectionner la race</option>
               <option value="montbéliarde">Montbéliarde</option>
               <option value="holstein">Holstein</option>
             </Form.Select>

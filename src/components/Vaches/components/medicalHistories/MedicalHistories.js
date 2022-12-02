@@ -36,7 +36,8 @@ function MedicalHistories() {
           Historique medicale
          
         </Card.Header>
-        <Card.Body>
+      <Card.Body>
+      {medicalHistories.length > 0 ? 
           <Table striped>
             <thead>
               <tr>
@@ -57,7 +58,7 @@ function MedicalHistories() {
                 );
               })}
             </tbody>
-          </Table>
+          </Table> : <div style={{textAlign: 'center'}}>Aucune historique medical disponible</div> }
         </Card.Body>
       </Card>
 
