@@ -1,82 +1,81 @@
-import React, { useState, useEffect } from "react";
+import React, { useState ,useEffect} from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { BACKEND_URL } from "../../../config";
+import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
-  // ************statesForm*********
+function CreateMedicalHistories({ cowId,refresh,setRefresh}) {
+  // ************statesForm********
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   // ***************statechange*********************************
   const [medical, setMedical] = useState({ date: "", sickeness: "" });
-
+  
+   
   // ***************funcchange*********************************
   const handleChangeDate = (e) => {
-    setMedical({ ...medical, date: e.target.value });
+    
+    setMedical({ ...medical, date: e.target.value })
   };
   const handleChangeSicknesse = (e) => {
-    setMedical({ ...medical, sickeness: e.target.value });
+    setMedical({ ...medical, sickeness: e.target.value })
+   
   };
-
+  
   // ***************axios*********************************
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { date, sickeness } = medical;
-    const url = `${BACKEND_URL}/medical_histories/${id}`;
-
-    axios
-      .put(url, {
-        cow: cowId,
+    const { date, sickeness} = medical;
+    const url = `${BACKEND_URL}/medical_histories/`;
+    
+    axios.post(url, {
+        cow :cowId,
         diagnosis_date: new Date(date),
-        sickeness,
+        sickeness 
       })
       .then((response) => {
-        refresh ? setRefresh(false) : setRefresh(true);
-        setMedical({ date: "", sicknesse: "" });
+        refresh ? setRefresh(false) : setRefresh(true)
+        setMedical({ date : "" , sicknesse:""})
+        
 
-        if (response.status === 200) {
-          console.log("upload succesfuly");
+        if (response.status === 500) {
+        } else if (response.status === 200 && response.data.status === 200) {
+        } else if (response.status === 200 && response.data.status !== 200) {
+          console.log(
+            "Error inserted new data because : " + response.data.message
+          );
         } else {
           console.log("Server error with : " + response.data);
         }
       })
       .catch((err) => console.warn(err));
-  };
+     
+    console.log("submit");
+  }
   // ***************funcchange*********************************
   return (
     <div>
-      <Button
-        style={{ marginLeft: "10px" }}
-        variant="warning"
-        onClick={handleShow}
-        size="sm"
-      >
-        <FontAwesomeIcon icon={faPenToSquare} />
+      <Button variant="primary" onClick={handleShow}>
+        +
       </Button>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal  show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modifier visites medicale</Modal.Title>
+          <Modal.Title>Ajouter visites medicale</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3">
               <Form.Label>Date de Diagnostic</Form.Label>
-              <Form.Control
-                value={medical.date}
-                onChange={handleChangeDate}
-                type="date"
-              />
+              <Form.Control value={medical.date} onChange={handleChangeDate}  type="date"  />
             </Form.Group>
 
             <Form.Label>Maladies</Form.Label>
             <Form.Select
               aria-label="Default select example"
+             
               value={medical.sicknesse}
               onChange={handleChangeSicknesse}
             >
@@ -102,18 +101,18 @@ function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
             <hr />
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
+              <Button variant="secondary" onClick={handleClose} >
                 Fermer
               </Button>
               <Button variant="primary" onClick={handleClose} type="submit">
                 Valider
               </Button>
             </Modal.Footer>
-          </Form>
+          </Form >
         </Modal.Body>
       </Modal>
     </div>
   );
 }
 
-export default EditMedicalHistories;
+export default CreateMedicalHistories;

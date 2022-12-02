@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import CreateMedicalHistories from "./components/CreateMedicalHistories";
-import DeleteMedicalHistories from "./components/DeleteMedicalHistories";
-import EditMedicalHistories from "./components/EditMedicalHistories";
+import CreateMedicalHistories from "./CreateMedicalHistories";
+import DeleteMedicalHistories from "./DeleteMedicalHistories";
+import EditMedicalHistories from "./EditMedicalHistories";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { BACKEND_URL } from "../../config";
+import { BACKEND_URL } from "../../../../config";
 import { useParams } from "react-router-dom";
 
 function Cow() {

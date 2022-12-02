@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import CreateCowsComponent from "./components/CreateCowsComponent";
-import EditCowsComponent from "./components/EditCowsComponent";
-import DeleteCowsComponent from "./components/DeleteCowsComponent";
-import { BACKEND_URL } from "../../config";
+import CreateCowsComponent from "./CreateCowsComponent";
+import EditCowsComponent from "./EditCowsComponent";
+import DeleteCowsComponent from "./DeleteCowsComponent";
+import { BACKEND_URL } from "../../../../config";
 import { Navigate, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
-function Vaches() {
+function Cows() {
   const navigate = useNavigate();
 
   // *********States*************
@@ -97,4 +97,4 @@ function Vaches() {
   );
 }
 
-export default Vaches;
+export default Cows;

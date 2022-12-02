@@ -29,21 +29,21 @@ const SideBar = ({ isOpen, toggle }) => (
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to={"/about"}>
+          <NavLink tag={Link} to={"/MedicalHistories"}>
             <FontAwesomeIcon icon={faNotesMedical} className="p-2" />
             Visite Midicals
           </NavLink>
         </NavItem>
 
         <NavItem>
-          <NavLink tag={Link} to={"/pages"}>
+          <NavLink tag={Link} to={"/Births"}>
             <FontAwesomeIcon icon={faBaby} className="p-2" />
             naissance
           </NavLink>
         </NavItem>
         <NavItem></NavItem>
         <NavItem>
-          <NavLink tag={Link} to={"/contact"}>
+          <NavLink tag={Link} to={"/Milk"}>
             <FontAwesomeIcon icon={faWhiskeyGlass} className="p-2" />
             Lait
           </NavLink>
