@@ -132,13 +132,14 @@ function Cow() {
             </thead>
             <tbody>
               {births.map((birth, index) => {
+                
                 return (
                   <tr key = {index}>
                     <td  className="text-center">{new Date(birth.birth_date).toLocaleDateString()}</td>
                     
                     <td className="d-flex justify-content-center align-items-center">
                       <DeleteBirths id={birth.id} setRefresh={setRefresh} refresh={refresh} />
-                      <EditBirths cowId={cowId} id={birth.id} setRefresh={setRefresh} refresh={refresh} />
+                      <EditBirths birthDate={birth.birth_date} cowId={cowId} id={birth.id} setRefresh={setRefresh} refresh={refresh} />
                     </td> 
                   </tr>
                 );

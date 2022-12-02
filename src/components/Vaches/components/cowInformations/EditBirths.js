@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -7,78 +7,84 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function EditBirths({ id, cowId, refresh, setRefresh }) {
-   const [show, setShow] = useState(false);
-   const handleClose = () => setShow(false);
-   const handleShow = () => setShow(true);
-   const [births, setBirths] = useState({ date: ""});
- 
-   const handleChangeDate = (e) => {
-     setBirths({ ...births, date: e.target.value });
-   };
-   
-   const handleSubmit = (e) => {
-     e.preventDefault();
-     const { date } = births;
-     const url = `${BACKEND_URL}/births/${id}`;
- 
-     axios
-       .put(url, {
-         cow: cowId,
-         birth_date: new Date(date),
-       })
-       .then((response) => {
-         refresh ? setRefresh(false) : setRefresh(true);
-         setBirths({ date: "", sicknesse: "" });
- 
-         if (response.status === 200) {
-           console.log("upload succesfuly");
-         } else {
-           console.log("Server error with : " + response.data);
-         }
-       })
-       .catch((err) => console.warn(err));
+function EditBirths({ birthDate, id, cowId, refresh, setRefresh }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const [births, setBirths] = useState({ birth_date: "" });
+  const handleShow = () => {
+    setBirths({ birth_date: birthDate });
+    setShow(true);
   };
-  
+
+  const handleChangeDate = (e) => {
+    setBirths({ ...births, birth_date: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const url = `${BACKEND_URL}/births/${id}`;
+
+    axios
+      .put(url, {
+        cow: cowId,
+        birth_date: new Date(births.birth_date),
+      })
+      .then(() => {
+        refresh ? setRefresh(false) : setRefresh(true);
+      })
+      .catch((err) => console.warn(err));
+  };
+  const entryDateObj = new Date(births.birth_date);
+  const formattedDate = `${entryDateObj.getFullYear()}-${
+    entryDateObj.getMonth() < 10
+      ? `0${entryDateObj.getMonth()}`
+      : entryDateObj.getMonth()
+  }-${
+    entryDateObj.getDate() < 10
+      ? `0${entryDateObj.getDate()}`
+      : entryDateObj.getDate()
+  }`;
+  console.log(formattedDate);
   return (
     <div>
       <Button
-    style={{ marginLeft: "10px" }}
-    variant="warning"
-    onClick={handleShow}
-    size="sm"
-  >
-    <FontAwesomeIcon icon={faPenToSquare} />
-  </Button>
+        style={{ marginLeft: "10px" }}
+        variant="warning"
+        onClick={handleShow}
+        size="sm"
+      >
+        <FontAwesomeIcon icon={faPenToSquare} />
+      </Button>
 
-  <Modal show={show} onHide={handleClose}>
-    <Modal.Header closeButton>
-      <Modal.Title>Modifier la date de naissance</Modal.Title>
-    </Modal.Header>
-    <Modal.Body>
-      <Form onSubmit={handleSubmit}>
-        <Form.Group className="mb-3">
-          <Form.Label>Date de Naissance</Form.Label>
-          <Form.Control
-            value={births.date}
-            onChange={handleChangeDate}
-            type="date"
-          />
-        </Form.Group>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modifier la date de naissance</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Date de Naissance</Form.Label>
+              <Form.Control
+                value={formattedDate}
+                onChange={handleChangeDate}
+                type="date"
+              />
+            </Form.Group>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Fermer
-          </Button>
-          <Button variant="primary" onClick={handleClose} type="submit">
-            Valider
-          </Button>
-        </Modal.Footer>
-      </Form>
-    </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Fermer
+              </Button>
+              <Button variant="primary" onClick={handleClose} type="submit">
+                Valider
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default EditBirths
+export default EditBirths;
