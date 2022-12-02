@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
+import CreateMilk from "./CreateMilk";
+import EditMilk from "./EditMilk";
+import DeleteMilk from "./DeleteMilk";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
@@ -42,14 +45,14 @@ function Milk() {
           }}
         >
           Production du Lait Par Jour
-          {/* <CreateMedicalHistories cowId={cowId } setRefresh={setRefresh} refresh={refresh}/> */}
+          <CreateMilk setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
           <Table striped>
             <thead>
               <tr>
                 <th>Date de Production</th>
-                <th>Quentité</th>
+                <th  >Quentité <span className=" font-weight-light ">L/Jour</span></th>
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -58,9 +61,10 @@ function Milk() {
                 return (
                   <tr key = {index}>
                     <td>{ new Date(milk.production_date).toLocaleDateString()}</td>
-                    <td>{milk.quantity} </td>
+                    <td className=" fw-bold">{milk.quantity}   </td>
                     <td className="d-flex justify-content-center align-items-center">
-                      {/* <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh} /> <EditMedicalHistories cowId={cowId} id={medical.id} setRefresh={setRefresh} refresh={refresh} /> */}
+                      <DeleteMilk id={milk.id} setRefresh={setRefresh} refresh={refresh} />
+                      <EditMilk  id={milk.id} setRefresh={setRefresh} refresh={refresh} />
                     </td> 
                   </tr>
                 );
