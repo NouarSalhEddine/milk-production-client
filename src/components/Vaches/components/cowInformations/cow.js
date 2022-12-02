@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import CreateMedicalHistories from "./CreateMedicalHistories";
 import DeleteMedicalHistories from "./DeleteMedicalHistories";
 import EditMedicalHistories from "./EditMedicalHistories";
+import CreateBirths from "./CreateBirths";
+import EditBirths from "./EditBirths";
+import DeleteBirths from "./DeleteBirths";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
@@ -16,7 +19,7 @@ function Cow() {
   
   // ***************states********************
   const { id: cowId } = useParams();
-  const url = `${BACKEND_URL}/cows/${cowId}`;
+  const url = BACKEND_URL;
   const [cow, setCow] = useState([
     {
       id: "",
@@ -33,17 +36,29 @@ function Cow() {
       diagnosis_date: "",
     },
   ]);
+  const [births, setBirths] = useState([
+    {
+      id: "",
+      cow: "",
+      birth_date: "",
+      
+    },
+  ]);
   //  ****************axios***********
   useEffect(() => {
-    axios.get(url).then((res) => {
+    axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
     });
 
-    axios.get(`${BACKEND_URL}/medical_histories/cow/${cowId}`).then((res) => {
+    axios.get(`${url}/medical_histories/cow/${cowId}`).then((res) => {
       setMedicalHistories(res.data);
     })
+    axios.get(`${url}/births/cow/${cowId}`).then((res) => {
+      setBirths(res.data);
+    })
   }, [refresh]);
- 
+  
+  console.log(births)
   
   const entry_date = new Date(cow.entry_date).toLocaleDateString();
 
@@ -105,9 +120,32 @@ function Cow() {
           }}
         >
           Naissances
-          <Button variant="primary">+</Button>
+          <CreateBirths cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
-        <Card.Body></Card.Body>
+        <Card.Body>
+        <Table striped>
+            <thead>
+              <tr>
+                <th>Date de Naissance</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {births.map((birth, index) => {
+                return (
+                  <tr key = {index}>
+                    <td>{new Date(birth.birth_date).toLocaleDateString()}</td>
+                    
+                    <td className="d-flex justify-content-center align-items-center">
+                      <DeleteBirths id={birth.id} setRefresh={setRefresh} refresh={refresh} />
+                      <EditBirths cowId={cowId} id={birth.id} setRefresh={setRefresh} refresh={refresh} />
+                    </td> 
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </Card.Body>
       </Card>
      
     </div>
