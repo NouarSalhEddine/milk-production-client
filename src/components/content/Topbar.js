@@ -1,33 +1,18 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAlignLeft } from "@fortawesome/free-solid-svg-icons";
-import {
-  Navbar,
-  Button,
-  NavbarToggler,
-  Collapse, 
-} from "reactstrap";
+import logo from './milk.jpg'
 
 
-const Topbar = ({ toggleSidebar }) => {
-  const [topbarIsOpen, setTopbarOpen] = useState(true);
-  const toggleTopbar = () => setTopbarOpen(!topbarIsOpen);
+
+const Topbar = () => {
 
   return (
-    <Navbar
-      color="light"
-      light
-      className="navbar shadow-sm p-3 mb-5 bg-white rounded"
-      expand="md"
-    >
-      <Button color="info" onClick={toggleSidebar}>
-        <FontAwesomeIcon icon={faAlignLeft} />
-      </Button>
-      <NavbarToggler onClick={toggleTopbar} />
-      <Collapse isOpen={topbarIsOpen} navbar>
-       <h5 className="p-4">Vaches , Visites Medicales et La production du lait</h5>
-      </Collapse>
-    </Navbar>
+    <div>
+    <img style={{height:"100px",width:"100%",margin:"0",padding:"0"}} src={logo}  alt="milk" /> 
+   </div>
+     
+   
   );
 };
 

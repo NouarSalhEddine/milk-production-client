@@ -16,7 +16,7 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
   fluid
   className={classNames("content", { "is-open": sidebarIsOpen })}
   >
-    <Topbar toggleSidebar={toggleSidebar} />
+    <Topbar  />
     <Routes>
       <Route exact path="/" component={() => "Hello"} />
       <Route exact path="/vaches" element={<Cows  />} />

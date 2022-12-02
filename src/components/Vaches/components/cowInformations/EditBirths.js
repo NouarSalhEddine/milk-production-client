@@ -38,14 +38,14 @@ function EditBirths({ birthDate, id, cowId, refresh, setRefresh }) {
   const entryDateObj = new Date(births.birth_date);
   const formattedDate = `${entryDateObj.getFullYear()}-${
     entryDateObj.getMonth() < 10
-      ? `0${entryDateObj.getMonth()}`
-      : entryDateObj.getMonth()
+      ? `0${entryDateObj.getMonth() + 1}`
+      : entryDateObj.getMonth() + 1
   }-${
     entryDateObj.getDate() < 10
       ? `0${entryDateObj.getDate()}`
       : entryDateObj.getDate()
   }`;
-  console.log(formattedDate);
+ 
   return (
     <div>
       <Button

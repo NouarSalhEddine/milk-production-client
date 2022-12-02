@@ -78,7 +78,8 @@ function EditCowsComponent({
   //  **************axios*************
 
   const entryDateObj = new Date(cows.entry_date)
-  const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth()}` : entryDateObj.getMonth()}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
+  const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth() + 1}` : entryDateObj.getMonth() + 1}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
+  console.log(entryDateObj.getDate())
   return (
     <div>
       <Button
@@ -107,7 +108,7 @@ function EditCowsComponent({
               <Form.Label>date d'entrer :</Form.Label>
               <Form.Control
                 type="date"
-                value={formattedDate}
+                defaultValue={formattedDate}
                 onChange={onChangeDateEntry}
               />
             </Form.Group>

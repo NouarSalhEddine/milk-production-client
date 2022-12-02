@@ -6,15 +6,19 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
-  // ************statesForm*********
+function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id, refresh, setRefresh }) {
+  
   const [show, setShow] = useState(false);
+  const [medical, setMedical] = useState({ diagnosis_date: "", sickeness: "" });
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  // ***************statechange*********************************
-  const [medical, setMedical] = useState({ date: "", sickeness: "" });
-
-  // ***************funcchange*********************************
+  const handleShow = () => {
+    setMedical({
+      diagnosis_date: diagnosisDate,
+      sickeness: sickenesse 
+    })
+    setShow(true)
+  };
+ 
   const handleChangeDate = (e) => {
     setMedical({ ...medical, date: e.target.value });
   };
@@ -26,28 +30,29 @@ function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { date, sickeness } = medical;
+    const { diagnosis_date, sickeness } = medical;
     const url = `${BACKEND_URL}/medical_histories/${id}`;
-
     axios
       .put(url, {
         cow: cowId,
-        diagnosis_date: new Date(date),
+        diagnosis_date,
         sickeness,
       })
-      .then((response) => {
+      .then(() => {
         refresh ? setRefresh(false) : setRefresh(true);
-        setMedical({ date: "", sicknesse: "" });
-
-        if (response.status === 200) {
-          console.log("upload succesfuly");
-        } else {
-          console.log("Server error with : " + response.data);
-        }
       })
       .catch((err) => console.warn(err));
   };
-  // ***************funcchange*********************************
+  const entryDateObj = new Date(medical.diagnosis_date);
+  const formattedDate = `${entryDateObj.getFullYear()}-${
+    entryDateObj.getMonth() < 10
+      ? `0${entryDateObj.getMonth() + 1}`
+      : entryDateObj.getMonth() + 1
+  }-${
+    entryDateObj.getDate() < 10
+      ? `0${entryDateObj.getDate()}`
+      : entryDateObj.getDate()
+  }`;
   return (
     <div>
       <Button
@@ -68,7 +73,7 @@ function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
             <Form.Group className="mb-3">
               <Form.Label>Date de Diagnostic</Form.Label>
               <Form.Control
-                value={medical.date}
+                value={formattedDate}
                 onChange={handleChangeDate}
                 type="date"
               />
@@ -77,7 +82,7 @@ function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
             <Form.Label>Maladies</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={medical.sicknesse}
+              value={medical.sickeness}
               onChange={handleChangeSicknesse}
             >
               <option>Selectioner La Maladie</option>

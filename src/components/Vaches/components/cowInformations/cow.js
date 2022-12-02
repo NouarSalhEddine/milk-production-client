@@ -58,7 +58,7 @@ function Cow() {
     })
   }, [refresh]);
   
-  console.log(births)
+
   
   const entry_date = new Date(cow.entry_date).toLocaleDateString();
 
@@ -102,7 +102,8 @@ function Cow() {
                   <tr key={index}>
                     <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
                     <td>{medical.sickeness} </td>
-                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh} /> <EditMedicalHistories cowId={cowId} id={medical.id} setRefresh={setRefresh} refresh={refresh} /></td>
+                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh} />
+                      <EditMedicalHistories sickenesse={medical.sickeness} diagnosisDate={medical.diagnosis_date } cowId={cowId} id={medical.id} setRefresh={setRefresh} refresh={refresh} /></td>
                   </tr>
                 );
               })}
