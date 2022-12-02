@@ -4,6 +4,9 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import { BACKEND_URL } from "../../../../config";
 import Modal from "react-bootstrap/Modal";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
 
 function CreateCowsComponent({ refresh, setRefresh }) {
   //  **************states*************
@@ -14,6 +17,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
   });
   // ************statesForm********
   const [show, setShow] = useState(false);
+  const [showToast, setShowToast] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   //  **************HandleFunction*************
@@ -43,6 +47,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
       })
       .then((response) => {
         refresh ? setRefresh(false) : setRefresh(true);
+        setShowToast(true)
         console.log("refresh");
         setCows({
           serial_number: "",
@@ -66,6 +71,23 @@ function CreateCowsComponent({ refresh, setRefresh }) {
   //  **************axios*************
   return (
     <div>
+      
+      <Col style={{position: 'absolute', top: -180, left:-270, zIndex: 1}} xs={6}>
+        <Toast onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Téléchargement</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Une vache a eté ajouter!</Toast.Body>
+        </Toast>
+      </Col>
+     
+   
       <Button variant="primary" onClick={handleShow}>
         +
       </Button>
