@@ -8,20 +8,15 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 function EditBirths({ id, cowId, refresh, setRefresh }) {
-   // ************statesForm*********
    const [show, setShow] = useState(false);
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
-   // ***************statechange*********************************
    const [births, setBirths] = useState({ date: ""});
  
-   // ***************funcchange*********************************
    const handleChangeDate = (e) => {
      setBirths({ ...births, date: e.target.value });
    };
-  
-   // ***************axios*********************************
- 
+   
    const handleSubmit = (e) => {
      e.preventDefault();
      const { date } = births;
@@ -31,7 +26,6 @@ function EditBirths({ id, cowId, refresh, setRefresh }) {
        .put(url, {
          cow: cowId,
          birth_date: new Date(date),
-         
        })
        .then((response) => {
          refresh ? setRefresh(false) : setRefresh(true);
@@ -44,7 +38,8 @@ function EditBirths({ id, cowId, refresh, setRefresh }) {
          }
        })
        .catch((err) => console.warn(err));
-   };
+  };
+  
   return (
     <div>
       <Button
@@ -70,9 +65,6 @@ function EditBirths({ id, cowId, refresh, setRefresh }) {
             type="date"
           />
         </Form.Group>
-
-       
-        <hr />
 
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>

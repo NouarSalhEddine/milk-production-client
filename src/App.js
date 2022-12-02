@@ -12,12 +12,17 @@ const App = () => {
   const [userCow, setUserCow] = useState("Jesse Hall");
 
   return (
+    
+
     <Router>
       <div className="App wrapper">
         <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
-        <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} userCow={userCow} setUserCow={setUserCow}/>
+        <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} userCow={userCow} setUserCow={setUserCow} />
+        
       </div>
+  
     </Router>
+    
   );
 };
 

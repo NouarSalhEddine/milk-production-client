@@ -50,7 +50,8 @@ function Cows() {
           <CreateCowsComponent refresh={refresh} setRefresh={setRefresh} />
         </Card.Header>
         <Card.Body>
-          <Table striped bordered hover>
+          Cliquer sur la vache pour ajouter/modifier l'historique medicale ou naissances
+          <Table striped bordered hover style={{marginTop: '10px'}}>
             <thead>
               <tr>
                 <th>Numéro De Serie</th>
@@ -65,13 +66,13 @@ function Cows() {
                 return (
                   <tr
                     key={index}
-                    onClick={() => openCow(cow.id)}
+                   
                     style={{ cursor: "pointer" }}
                   >
-                    <td style={{ fontWeight: "bold" }}>{cow.serial_number} </td>
-                    <td>{entryDate}</td>
-                    <td>{cow.breed}</td>
-                    <td className="d-flex justify-content-center align-items-center">
+                    <td  onClick={() => openCow(cow.id)} style={{ fontWeight: "bold" }}>{cow.serial_number} </td>
+                    <td  onClick={() => openCow(cow.id)} >{entryDate}</td>
+                    <td  onClick={() => openCow(cow.id)} >{cow.breed}</td>
+                    <td  style={{ cursor: "auto" }} className="d-flex justify-content-center align-items-center">
                       <DeleteCowsComponent
                         setRefresh={setRefresh}
                         refresh={refresh}
@@ -87,6 +88,7 @@ function Cows() {
                       />
                     </td>
                   </tr>
+                 
                 );
               })}
             </tbody>

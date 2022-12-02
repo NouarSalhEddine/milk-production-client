@@ -67,7 +67,6 @@ function CreateBirths({ cowId, refresh, setRefresh }) {
               <Form.Label>Date</Form.Label>
               <Form.Control value={births.date} onChange={handleChangeDate}  type="date"  />
             </Form.Group>
-            <hr />
 
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose} >

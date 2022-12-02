@@ -71,6 +71,9 @@ function EditCowsComponent({
     console.log("submit");
   };
   //  **************axios*************
+
+  const entryDateObj = new Date(entryDate)
+  const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth()}` : entryDateObj.getMonth()}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
   return (
     <div>
       <Button
@@ -90,16 +93,16 @@ function EditCowsComponent({
             <Form.Group className="mb-3">
               <Form.Label>numero de serie :</Form.Label>
               <Form.Control
-                value={cows.serial_number}
+                value={serialNumber}
                 onChange={onChangeSerialNumber}
-                type="text"
+                type="number"
               />
             </Form.Group>
             <Form.Group controlId="dateEntry">
               <Form.Label>date d'entrer :</Form.Label>
               <Form.Control
                 type="date"
-                value={cows.entry_date}
+                value={formattedDate}
                 onChange={onChangeDateEntry}
               />
             </Form.Group>
@@ -107,10 +110,10 @@ function EditCowsComponent({
             <Form.Label>Races :</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={cows.breed}
+              value={breed}
               onChange={onChangeBreed}
             >
-              <option> race :</option>
+              <option disabled>Selectionner la race</option>
               <option value="montbéliarde">Montbéliarde</option>
               <option value="holstein">Holstein</option>
             </Form.Select>

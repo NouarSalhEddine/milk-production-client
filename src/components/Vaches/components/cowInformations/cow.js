@@ -88,7 +88,7 @@ function Cow() {
           <CreateMedicalHistories cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
-          <Table striped>
+          {medicalHistories.length > 0 ? <Table striped>
             <thead>
               <tr>
                 <th>Date de Diagnostic</th>
@@ -99,15 +99,15 @@ function Cow() {
             <tbody>
               {medicalHistories.map((medical, index) => {
                 return (
-                  <tr key = {index}>
+                  <tr key={index}>
                     <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
                     <td>{medical.sickeness} </td>
-                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh}/> <EditMedicalHistories cowId={cowId } id={medical.id} setRefresh={setRefresh} refresh={refresh}/></td> 
+                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh} /> <EditMedicalHistories cowId={cowId} id={medical.id} setRefresh={setRefresh} refresh={refresh} /></td>
                   </tr>
                 );
               })}
             </tbody>
-          </Table>
+          </Table> : <div style={{textAlign: 'center'}}>Aucune historique medical disponible</div> }
         </Card.Body>
       </Card>
 
@@ -123,7 +123,7 @@ function Cow() {
           <CreateBirths cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
-        <Table striped>
+        { births.length > 0 ? <Table striped>
             <thead>
               <tr>
                 <th className="text-center">Date de Naissance</th>
@@ -144,7 +144,7 @@ function Cow() {
                 );
               })}
             </tbody>
-          </Table>
+          </Table>  : <div style={{textAlign: 'center'}}>Aucune naissance disponible</div> }
         </Card.Body>
       </Card>
      

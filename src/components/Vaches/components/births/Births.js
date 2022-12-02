@@ -57,15 +57,19 @@ function Births() {
               </tr>
             </thead>
             <tbody>
-             {births.map((birth, index) => {
-                
-                return (
-                  <tr key = {index}>
-                    <td  style={{paddingLeft:"20px"}} >{new Date(birth.birth_date).toLocaleDateString()}</td>
-                    <td  className="text-center">{birth.cow.serial_number}</td>
-                    
-                  </tr>
-                );
+             {
+               
+               births.map((birth, index) => {
+                 if (birth.cow.serial_number !== null || undefined) {
+                   
+                   return (
+                     <tr key = {index}>
+                       <td  style={{paddingLeft:"20px"}} >{new Date(birth.birth_date).toLocaleDateString()}</td>
+                       <td  className="text-center">{birth.cow.serial_number}</td>
+                       
+                     </tr>
+                   );
+                 }
               })}
             </tbody>
           </Table>

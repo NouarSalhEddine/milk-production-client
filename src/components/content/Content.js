@@ -27,6 +27,7 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
      
      
     </Routes>
+    
   </Container>
 );
 

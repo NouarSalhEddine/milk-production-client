@@ -99,7 +99,6 @@ function EditMedicalHistories({ cowId, id, refresh, setRefresh }) {
                 gangrène emphysémateuse
               </option>
             </Form.Select>
-            <hr />
 
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
