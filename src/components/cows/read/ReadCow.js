@@ -8,13 +8,14 @@ import DeleteBirths from "./births/DeleteBirth";
 import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 import { BACKEND_URL } from "../../../config";
 import { useParams } from "react-router-dom";
 
 function Cow() {
   // *********************refresh****************
   const  [refresh, setRefresh]  = useState(false)
-  
+  const [loading, setLoading] = useState(true);
   
   // ***************states********************
   const { id: cowId } = useParams();
@@ -45,6 +46,7 @@ function Cow() {
   ]);
   //  ****************axios***********
   useEffect(() => {
+    setLoading(true)
     axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
     });
@@ -55,6 +57,7 @@ function Cow() {
     axios.get(`${url}/births/cow/${cowId}`).then((res) => {
       setBirths(res.data);
     })
+    // setLoading(false)
   }, [refresh]);
   
 
@@ -63,8 +66,28 @@ function Cow() {
 
   return (
     <div>
+      {loading ? (
+              
+        <Card>
+          <Card.Body>
+            <Spinner animation="border" role="status">
+              <span
+                style={{}}
+                className="d-flex justify-content-md-center visually-hidden"
+              >
+                Loading...
+              </span>
+            </Spinner>
+          </Card.Body>
+        </Card>
+        
+      ) : 
+      
+      <>
+          
       
       <Card>
+      
         <Card.Header>Information</Card.Header>
         <Card.Body>
           Numero de serie: {cow.serial_number}
@@ -148,7 +171,8 @@ function Cow() {
           </Table>  : <div style={{textAlign: 'center'}}>Aucune naissance disponible</div> }
         </Card.Body>
       </Card>
-     
+      </>
+      }
     </div>
   );
 }

@@ -7,6 +7,7 @@ import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 function EditCowsComponent({
+  loading,setLoading,
   refresh,
   setRefresh,
   id,
@@ -48,6 +49,7 @@ function EditCowsComponent({
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const { serial_number, entry_date, breed } = cows;
     const url = `${BACKEND_URL}/cows/${id}`;
 

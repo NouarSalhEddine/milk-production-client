@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-function CreateCowsComponent({ loading,setLoading ,refresh, setRefresh }) {
+function CreateCowsComponent({loading,setLoading ,refresh, setRefresh }) {
   //  **************states*************
   const [cows, setCows] = useState({
     serial_number: "",
@@ -36,9 +36,10 @@ function CreateCowsComponent({ loading,setLoading ,refresh, setRefresh }) {
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const { serial_number, entry_date, breed } = cows;
     const url = `${BACKEND_URL}/cows`;
-    setLoading(true)
+   
     axios
       .post(url, {
         serial_number,
@@ -48,14 +49,21 @@ function CreateCowsComponent({ loading,setLoading ,refresh, setRefresh }) {
       .then((response) => {
         refresh ? setRefresh(false) : setRefresh(true);
         setShowToast(true)
-        console.log("refresh");
+        
         setCows({
           serial_number: "",
           entry_date: "",
           breed: "",
         });
-        setLoading(false)
-        
+        if (response.status === 500) {
+        } else if (response.status === 200 && response.data.status === 200) {
+        } else if (response.status === 200 && response.data.status !== 200) {
+          console.log(
+            "Error inserted new data because : " + response.data.message
+          );
+        } else {
+          console.log("Server error with : " + response.data);
+        }
       })
       .catch((err) => console.warn(err));
 

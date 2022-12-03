@@ -5,9 +5,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { BACKEND_URL } from "../../../config";
 
-function DeleteCowsComponent({ refresh, setRefresh, id }) {
+function DeleteCowsComponent({ loading,setLoading,refresh, setRefresh, id }) {
  
   const deleteCows = () => {
+    setLoading(true)
     const url = `${BACKEND_URL}/cows/${id}`;
     axios
       .delete(url)

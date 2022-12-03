@@ -62,7 +62,7 @@ a:hover {
 }
 
 .items-menu {
-  color: #050a30;
+  color: #050a30 !important;
   background: #050a30;
 }
 
