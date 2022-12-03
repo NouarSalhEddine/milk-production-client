@@ -19,7 +19,7 @@ a:focus {
   transition: all 0.3s;
 }
 a:hover {
-  color: #050a30 !important ;
+  color: #D9D9D9 !important ;
 }
 /* ---------------------------------------------------
     SIDEBAR STYLE
@@ -27,7 +27,7 @@ a:hover {
 .sidebar {
   min-width: 250px;
   max-width: 250px;
-  background: #7386d5;
+  background: #D9D9D9;
   color: #fff;
   margin-left: -250px;
   transition: all 0.5s;
@@ -48,7 +48,7 @@ a:hover {
 }
 
 .sidebar ul p {
-  color: #fff;
+  color: #050a30;
   padding: 10px;
 }
 
@@ -58,11 +58,11 @@ a:hover {
 
 .nav-item:hover {
   color: #050a30 !important;
-  background: #fff;
+  background: #050a30;
 }
 
 .items-menu {
-  color: #fff;
+  color: #050a30;
   background: #050a30;
 }
 
@@ -101,7 +101,7 @@ li a.dropdown-toggle::after {
 }
 
  .nav-link {
-  color: white ;
+  color: #050a30 ;
   display: flex !important;
   align-items: center !important;
 }
@@ -144,7 +144,7 @@ li a.dropdown-toggle::after {
   }
 }
 footer {
-  color: #fafafa;
-  background: #050a30;
+  color: #050a30;
+  background:#D9D9D9 ;
   font-size: 14px;
 }
