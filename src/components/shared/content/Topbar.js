@@ -4,10 +4,10 @@ import Navbar from 'react-bootstrap/Navbar';
 
 const Topbar = () => {
   return (
-    <div>
-     <Navbar className="topbar">
+    <div className=" text-center ">
+     <Navbar style={{paddingLeft:"auto"}} className="ml-4 text-center topbar">
         <Container>
-          <Navbar.Brand className="text-light" href="#home">Acceuil</Navbar.Brand>
+          <h3  className=" text-light" href="#">Dieu donne le lait, mais non le seau</h3>
         </Container>
       </Navbar>
     </div>

@@ -27,6 +27,7 @@ function Cows() {
   ]);
 
   useEffect(() => {
+    setLoading(true)
     const url = `${BACKEND_URL}/cows`;
     axios.get(url).then((res) => {
       setAddCows(res.data);

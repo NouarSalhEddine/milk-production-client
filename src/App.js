@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SideBar from "./components/shared/sidebar/SideBar";
 import Content from "./components/shared/content/Content";
+import Topbar from "./components/shared/content/Topbar";
 import "./App.css";
 
 const App = () => {
@@ -11,11 +12,20 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App wrapper">
+      <Topbar />
+      <div style={{}} className="App wrapper">
         
         <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
         <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} />
       </div>
+      <footer className=" pt-4 text-center ">
+      <div > 
+        <p>Projet réalisé par Nouar Salah Eddine - 2022 </p>
+        <p>Les icones Milk production manager , sont prises sur fontAwesome.com</p>
+        
+        <small className="text-muted ">Copyright © 1992 - 2022 . Tous droits réservés.</small>
+      </div>
+   </footer>
     </Router>
   );
 };

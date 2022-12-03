@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 function Cow() {
   // *********************refresh****************
   const  [refresh, setRefresh]  = useState(false)
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   
   // ***************states********************
   const { id: cowId } = useParams();
@@ -49,15 +49,18 @@ function Cow() {
     setLoading(true)
     axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
+      setLoading(false)
     });
 
     axios.get(`${url}/medical_histories/cow/${cowId}`).then((res) => {
       setMedicalHistories(res.data);
+      setLoading(false)
     })
     axios.get(`${url}/births/cow/${cowId}`).then((res) => {
       setBirths(res.data);
+      setLoading(false)
     })
-    // setLoading(false)
+    
   }, [refresh]);
   
 
@@ -69,11 +72,11 @@ function Cow() {
       {loading ? (
               
         <Card>
-          <Card.Body>
-            <Spinner animation="border" role="status">
+          <Card.Body style={{margin:"270px auto",textAlign:"center"}}>
+            <Spinner  animation="border" role="status">
               <span
                 style={{}}
-                className="d-flex justify-content-md-center visually-hidden"
+                className=" text-center visually-hidden"
               >
                 Loading...
               </span>
