@@ -2,37 +2,24 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import { BACKEND_URL } from "../../../../config";
+import { BACKEND_URL } from "../../../config";
 import Modal from "react-bootstrap/Modal";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-function EditCowsComponent({
-  refresh,
-  setRefresh,
-  id,
-  serialNumber,
-  entryDate,
-  breed,
-}) {
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Toast from 'react-bootstrap/Toast';
+
+function CreateCowsComponent({ refresh, setRefresh }) {
   //  **************states*************
   const [cows, setCows] = useState({
     serial_number: "",
     entry_date: "",
     breed: "",
   });
-  
   // ************statesForm********
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false)
-  ;
-  const handleShow = () => {
-    setCows({
-      serial_number: serialNumber,
-      entry_date: entryDate,
-      breed: breed,
-    })
-    setShow(true)
-  };
+  const [showToast, setShowToast] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   //  **************HandleFunction*************
 
   const onChangeSerialNumber = (e) => {
@@ -44,23 +31,29 @@ function EditCowsComponent({
   const onChangeBreed = (e) => {
     setCows({ ...cows, breed: e.target.value });
   };
+  
 
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
     const { serial_number, entry_date, breed } = cows;
-    const url = `${BACKEND_URL}/cows/${id}`;
+    const url = `${BACKEND_URL}/cows`;
 
     axios
-      .put(url, {
+      .post(url, {
         serial_number,
         entry_date: new Date(entry_date),
         breed,
       })
       .then((response) => {
         refresh ? setRefresh(false) : setRefresh(true);
+        setShowToast(true)
         console.log("refresh");
-        
+        setCows({
+          serial_number: "",
+          entry_date: "",
+          breed: "",
+        });
         if (response.status === 500) {
         } else if (response.status === 200 && response.data.status === 200) {
         } else if (response.status === 200 && response.data.status !== 200) {
@@ -76,30 +69,39 @@ function EditCowsComponent({
     console.log("submit");
   };
   //  **************axios*************
-
-  const entryDateObj = new Date(cows.entry_date)
-  const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth() + 1}` : entryDateObj.getMonth() + 1}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
-  console.log(entryDateObj.getDate())
   return (
     <div>
-      <Button
-        style={{ marginLeft: "10px" }}
-        variant="warning"
-        onClick={() => handleShow()}
-        size="sm"
-      >
-        <FontAwesomeIcon icon={faPenToSquare} />
+      
+      <Col style={{position: 'absolute', top: -180, left:-270, zIndex: 1}} xs={6}>
+        <Toast onClose={() => setShowToast(false)} show={showToast} delay={3000} autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Téléchargement</strong>
+            <small>11 mins ago</small>
+          </Toast.Header>
+          <Toast.Body>Une vache a eté ajouter!</Toast.Body>
+        </Toast>
+      </Col>
+     
+   
+      <Button variant="primary" onClick={handleShow}>
+        +
       </Button>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modifier</Modal.Title>
+          <Modal.Title>Ajouter Une Vache</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>numero de serie :</Form.Label>
               <Form.Control
-                value={cows.serial_number}
+               
                 onChange={onChangeSerialNumber}
                 type="number"
               />
@@ -107,8 +109,8 @@ function EditCowsComponent({
             <Form.Group controlId="dateEntry">
               <Form.Label>date d'entrer :</Form.Label>
               <Form.Control
+                
                 type="date"
-                defaultValue={formattedDate}
                 onChange={onChangeDateEntry}
               />
             </Form.Group>
@@ -116,14 +118,13 @@ function EditCowsComponent({
             <Form.Label>Races :</Form.Label>
             <Form.Select
               aria-label="Default select example"
-              value={cows.breed}
+              
               onChange={onChangeBreed}
             >
-              <option >Selectionner la race</option>
+              <option  >Selectionner la race</option>
               <option value="montbéliarde">Montbéliarde</option>
               <option value="holstein">Holstein</option>
             </Form.Select>
-            <hr />
 
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
@@ -140,4 +141,4 @@ function EditCowsComponent({
   );
 }
 
-export default EditCowsComponent;
+export default CreateCowsComponent;

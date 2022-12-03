@@ -3,11 +3,9 @@ import Card from "react-bootstrap/Card";
 import CreateMilk from "./CreateMilk";
 import EditMilk from "./EditMilk";
 import DeleteMilk from "./DeleteMilk";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { BACKEND_URL } from "../../../../config";
-import { useParams } from "react-router-dom";
+import { BACKEND_URL } from "../../config";
 
 function Milk() {
   // *********States*************

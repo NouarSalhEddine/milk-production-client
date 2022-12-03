@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import CreateCowsComponent from "./CreateCowsComponent";
-import EditCowsComponent from "./EditCowsComponent";
-import DeleteCowsComponent from "./DeleteCowsComponent";
-import { BACKEND_URL } from "../../../../config";
+import CreateCowsComponent from "./CreateCow";
+import EditCowsComponent from "./EditCow";
+import DeleteCowsComponent from "./DeleteCow";
+import { BACKEND_URL } from "../../../config";
 import { Navigate, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 

@@ -3,11 +3,12 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { BACKEND_URL } from "../../../../config";
 
-function DeleteMilk({refresh,setRefresh,id}) {
+function DeleteBirths({ id, refresh, setRefresh }) {
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:9000/milks/${id}`)
+      .delete(`${BACKEND_URL}/births/${id}`)
       .then((res) => {
         refresh ? setRefresh(false) : setRefresh(true);
         console.log("birth Account successfully deleted with : " + res.data);
@@ -22,4 +23,5 @@ function DeleteMilk({refresh,setRefresh,id}) {
     </div>
   );
 }
-export default DeleteMilk
+
+export default DeleteBirths

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import CreateMedicalHistories from "./CreateMedicalHistories";
-import DeleteMedicalHistories from "./DeleteMedicalHistories";
-import EditMedicalHistories from "./EditMedicalHistories";
-import CreateBirths from "./CreateBirths";
-import EditBirths from "./EditBirths";
-import DeleteBirths from "./DeleteBirths";
+import CreateMedicalHistories from "./medical_history/CreateMedicalHistory";
+import DeleteMedicalHistories from "./medical_history/DeleteMedicalHistory";
+import EditMedicalHistories from "./medical_history/EditMedicalHistory";
+import CreateBirths from "./births/CreateBirth";
+import EditBirths from "./births/EditBirth";
+import DeleteBirths from "./births/DeleteBirth";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { BACKEND_URL } from "../../../../config";
+import { BACKEND_URL } from "../../../config";
 import { useParams } from "react-router-dom";
 
 function Cow() {
@@ -127,8 +126,8 @@ function Cow() {
         { births.length > 0 ? <Table striped>
             <thead>
               <tr>
-                <th className="text-center">Date de Naissance</th>
-                <th className="text-center">Actions</th>
+                <th>Date de Naissance</th>
+                <th className="text-right">Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -136,7 +135,7 @@ function Cow() {
                 
                 return (
                   <tr key = {index}>
-                    <td  className="text-center">{new Date(birth.birth_date).toLocaleDateString()}</td>
+                    <td style={{paddingLeft: "10px"}}>{new Date(birth.birth_date).toLocaleDateString()}</td>
                     
                     <td className="d-flex justify-content-center align-items-center">
                       <DeleteBirths id={birth.id} setRefresh={setRefresh} refresh={refresh} />

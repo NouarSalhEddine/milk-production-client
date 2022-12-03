@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
-import { BACKEND_URL } from "../../../../config";
+import { BACKEND_URL } from "../../config";
 
 
 function MedicalHistories() {
@@ -37,6 +37,7 @@ function MedicalHistories() {
          
         </Card.Header>
       <Card.Body>
+        <div style={{marginBottom: '10px'}}>Pour ajouter une nouvelle historique medicale, veuillez cliquer sur le menu Vache et selectionner une vache</div>
       {medicalHistories.length > 0 ? 
           <Table striped>
             <thead>

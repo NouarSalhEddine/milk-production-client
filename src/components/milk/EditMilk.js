@@ -2,11 +2,14 @@ import React,{useState} from 'react'
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { BACKEND_URL } from "../../../../config";
+import { BACKEND_URL } from "../../config";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
-function CreateMilk({ id, refresh, setRefresh }) {
+
+function EditMilk({id , refresh , setRefresh}) {
   // ******************state*********************
- const  [milk, setMilk] = useState({
+  const  [milk, setMilk] = useState({
     production_date: "",
     quantity : ""
  })
@@ -29,10 +32,10 @@ function CreateMilk({ id, refresh, setRefresh }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const {  production_date, quantity } = milk;
-    const url = `${BACKEND_URL}/milks`;
+   
 
     axios
-      .post(url, {
+      .put(`${BACKEND_URL}/milks/${id}`, {
       
         production_date: new Date(production_date),
         quantity,
@@ -62,13 +65,18 @@ function CreateMilk({ id, refresh, setRefresh }) {
   return (
 
     <div>
-     <Button variant="primary" onClick={handleShow}>
-        +
-      </Button>
+     <Button
+    style={{ marginLeft: "10px" }}
+    variant="warning"
+    onClick={handleShow}
+    size="sm"
+  >
+    <FontAwesomeIcon icon={faPenToSquare} />
+  </Button>
 
       <Modal  show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Ajouter la quentité du lait</Modal.Title>
+          <Modal.Title>Modifier la quentité du lait</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={handleSubmit} >
@@ -81,7 +89,7 @@ function CreateMilk({ id, refresh, setRefresh }) {
               <Form.Control
                 value={milk.quantity}
                 onChange={handleChangeQuantity}
-                type="number"
+                type="text"
               />
             </Form.Group>
             <hr />
@@ -101,4 +109,5 @@ function CreateMilk({ id, refresh, setRefresh }) {
   )
 }
 
-export default CreateMilk
+
+export default EditMilk

@@ -23,29 +23,29 @@ const SideBar = ({ isOpen, toggle }) => (
         <p>Production du lait</p>
 
         <NavItem>
-          <NavLink tag={Link} to={"/vaches"}>
+          <NavLink tag={Link} to={"/cows"}>
             <FontAwesomeIcon icon={faCow} className="p-2" />
             Vaches
           </NavLink>
         </NavItem>
         <NavItem>
-          <NavLink tag={Link} to={"/MedicalHistories"}>
+          <NavLink tag={Link} to={"/medical_histories"}>
             <FontAwesomeIcon icon={faNotesMedical} className="p-2" />
-            Visite Midicals
+            Visites Médicales
           </NavLink>
         </NavItem>
 
         <NavItem>
-          <NavLink tag={Link} to={"/Births"}>
+          <NavLink tag={Link} to={"/births"}>
             <FontAwesomeIcon icon={faBaby} className="p-2" />
-            naissance
+            Naissances
           </NavLink>
         </NavItem>
         <NavItem></NavItem>
         <NavItem>
-          <NavLink tag={Link} to={"/Milk"}>
+          <NavLink tag={Link} to={"/milk-production"}>
             <FontAwesomeIcon icon={faWhiskeyGlass} className="p-2" />
-            Lait
+            Production du laît
           </NavLink>
         </NavItem>
       </Nav>

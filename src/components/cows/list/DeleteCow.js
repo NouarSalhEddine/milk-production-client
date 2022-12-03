@@ -1,13 +1,16 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
+import { BACKEND_URL } from "../../../config";
 
-function DeleteMedicalHistories({ id, refresh, setRefresh }) {
-  const handleDelete = () => {
+function DeleteCowsComponent({ refresh, setRefresh, id }) {
+ 
+  const deleteCows = () => {
+    const url = `${BACKEND_URL}/cows/${id}`;
     axios
-      .delete(`http://localhost:9000//medical_histories/${id}`)
+      .delete(url)
       .then((res) => {
         refresh ? setRefresh(false) : setRefresh(true);
         console.log("Cows Account successfully deleted with : " + res.data);
@@ -16,11 +19,11 @@ function DeleteMedicalHistories({ id, refresh, setRefresh }) {
   };
   return (
     <div>
-      <Button onClick={handleDelete} size="sm" variant="danger">
+      <Button onClick={deleteCows} size="sm" variant="danger">
         <FontAwesomeIcon icon={faTrash} />
       </Button>
     </div>
   );
 }
 
-export default DeleteMedicalHistories;
+export default DeleteCowsComponent;
