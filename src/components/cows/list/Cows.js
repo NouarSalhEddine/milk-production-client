@@ -7,16 +7,15 @@ import EditCowsComponent from "./EditCow";
 import DeleteCowsComponent from "./DeleteCow";
 import { BACKEND_URL } from "../../../config";
 import Spinner from "react-bootstrap/Spinner";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
 function Cows() {
   const navigate = useNavigate();
 
-  // *********States*************
   const [loading, setLoading] = useState(false);
   const [refresh, setRefresh] = useState(false);
-  // const [id, setId] = useState('');
+
   const [addCows, setAddCows] = useState([
     {
       id: "",
@@ -27,11 +26,11 @@ function Cows() {
   ]);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const url = `${BACKEND_URL}/cows`;
     axios.get(url).then((res) => {
       setAddCows(res.data);
-      setLoading(false)
+      setLoading(false);
     });
   }, [refresh]);
 
@@ -74,7 +73,6 @@ function Cows() {
                   <tr>
                     <td colSpan={4} className="p-4 text-center">
                       {" "}
-                      {" "}
                       <Spinner animation="border" role="status">
                         <span
                           style={{}}
@@ -107,15 +105,15 @@ function Cows() {
                           className="d-flex justify-content-center align-items-center"
                         >
                           <DeleteCowsComponent
-                             loading={loading}
-                             setLoading={setLoading}
+                            loading={loading}
+                            setLoading={setLoading}
                             setRefresh={setRefresh}
                             refresh={refresh}
                             id={cow.id}
                           />
                           <EditCowsComponent
-                             loading={loading}
-                             setLoading={setLoading}
+                            loading={loading}
+                            setLoading={setLoading}
                             serialNumber={cow.serial_number}
                             entryDate={cow.entry_date}
                             breed={cow.breed}

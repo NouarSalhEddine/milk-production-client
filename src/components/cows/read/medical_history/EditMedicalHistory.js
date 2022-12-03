@@ -11,7 +11,6 @@ function EditMedicalHistories({
   diagnosisDate,
   cowId,
   id,
-  loading,
   setLoading,
   refresh,
   setRefresh,

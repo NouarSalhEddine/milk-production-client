@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import { BACKEND_URL } from "../../config";
-
 
 function MedicalHistories() {
   const [loading, setLoading] = useState(false);
@@ -18,43 +16,42 @@ function MedicalHistories() {
     },
   ]);
   useEffect(() => {
-    setLoading(true)
-    const url = BACKEND_URL
+    setLoading(true);
+    const url = BACKEND_URL;
     axios.get(`${url}/medical_histories/`).then((res) => {
       setMedicalHistories(res.data);
-      setLoading(false)
-    })
-    
+      setLoading(false);
+    });
   }, []);
-  
+
   return (
     <Card style={{ marginTop: "2rem" }}>
-        <Card.Header
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          Historique medicale
-         
-        </Card.Header>
+      <Card.Header
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        Historique medicale
+      </Card.Header>
       <Card.Body>
-        <div style={{marginBottom: '10px'}}>Pour ajouter une nouvelle historique medicale, veuillez cliquer sur le menu Vache et selectionner une vache</div>
-      {medicalHistories.length > 0 ? 
+        <div style={{ marginBottom: "10px" }}>
+          Pour ajouter une nouvelle historique medicale, veuillez cliquer sur le
+          menu Vache et selectionner une vache
+        </div>
+        {medicalHistories.length > 0 ? (
           <Table striped>
             <thead>
               <tr>
                 <th>Date de Diagnostic</th>
                 <th>Maladie</th>
-                
               </tr>
             </thead>
             {loading ? (
               <tbody>
                 <tr>
                   <td colSpan={4} className="p-4 text-center">
-                    {" "}
                     {" "}
                     <Spinner animation="border" role="status">
                       <span
@@ -67,24 +64,29 @@ function MedicalHistories() {
                   </td>
                 </tr>
               </tbody>
-            ) :
+            ) : (
               <tbody>
                 {medicalHistories.map((medical, index) => {
-              
                   return (
                     <tr key={index}>
-                      <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
+                      <td>
+                        {new Date(medical.diagnosis_date).toLocaleDateString()}
+                      </td>
                       <td>{medical.sickeness} </td>
-
                     </tr>
                   );
                 })}
-              </tbody>}
-          </Table> : <div style={{textAlign: 'center'}}>Aucune historique medical disponible</div> }
-        </Card.Body>
-      </Card>
-
-  )
+              </tbody>
+            )}
+          </Table>
+        ) : (
+          <div style={{ textAlign: "center" }}>
+            Aucune historique medical disponible
+          </div>
+        )}
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default MedicalHistories
+export default MedicalHistories;

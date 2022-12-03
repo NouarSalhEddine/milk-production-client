@@ -1,45 +1,38 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function CreateMedicalHistories({loading, setLoading, cowId,refresh,setRefresh}) {
-  // ************statesForm********
+function CreateMedicalHistories({ setLoading, cowId, refresh, setRefresh }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  // ***************statechange*********************************
+
   const [medical, setMedical] = useState({ date: "", sickeness: "" });
-  
-   
-  // ***************funcchange*********************************
+
   const handleChangeDate = (e) => {
-    
-    setMedical({ ...medical, date: e.target.value })
+    setMedical({ ...medical, date: e.target.value });
   };
   const handleChangeSicknesse = (e) => {
-    setMedical({ ...medical, sickeness: e.target.value })
-   
+    setMedical({ ...medical, sickeness: e.target.value });
   };
-  
-  // ***************axios*********************************
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
-    const { date, sickeness} = medical;
+    setLoading(true);
+    const { date, sickeness } = medical;
     const url = `${BACKEND_URL}/medical_histories/`;
-    
-    axios.post(url, {
-        cow :cowId,
+
+    axios
+      .post(url, {
+        cow: cowId,
         diagnosis_date: new Date(date),
-        sickeness 
+        sickeness,
       })
       .then((response) => {
-        refresh ? setRefresh(false) : setRefresh(true)
-        setMedical({ date : "" , sicknesse:""})
-        
+        refresh ? setRefresh(false) : setRefresh(true);
+        setMedical({ date: "", sicknesse: "" });
 
         if (response.status === 500) {
         } else if (response.status === 200 && response.data.status === 200) {
@@ -52,31 +45,32 @@ function CreateMedicalHistories({loading, setLoading, cowId,refresh,setRefresh})
         }
       })
       .catch((err) => console.warn(err));
-     
-    console.log("submit");
-  }
-  // ***************funcchange*********************************
+  };
+
   return (
     <div>
       <Button variant="primary" onClick={handleShow}>
         +
       </Button>
 
-      <Modal  show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Ajouter visites medicale</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} >
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Date de Diagnostic</Form.Label>
-              <Form.Control value={medical.date} onChange={handleChangeDate}  type="date"  />
+              <Form.Control
+                value={medical.date}
+                onChange={handleChangeDate}
+                type="date"
+              />
             </Form.Group>
 
             <Form.Label>Maladies</Form.Label>
             <Form.Select
               aria-label="Default select example"
-             
               value={medical.sicknesse}
               onChange={handleChangeSicknesse}
             >
@@ -101,14 +95,14 @@ function CreateMedicalHistories({loading, setLoading, cowId,refresh,setRefresh})
             </Form.Select>
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose} >
+              <Button variant="secondary" onClick={handleClose}>
                 Fermer
               </Button>
               <Button variant="primary" onClick={handleClose} type="submit">
                 Valider
               </Button>
             </Modal.Footer>
-          </Form >
+          </Form>
         </Modal.Body>
       </Modal>
     </div>

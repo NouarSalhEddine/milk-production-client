@@ -5,37 +5,31 @@ import Modal from "react-bootstrap/Modal";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
 
-function CreateBirths({loading,setLoading, cowId, refresh, setRefresh }) {
-    // ************statesForm********
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    // ***************statechange*********************************
-    const [births, setBirths] = useState({ date: "" });
-    
-     
-    // ***************funcchange*********************************
-    const handleChangeDate = (e) => {
-      
-      setBirths({ ...births, date: e.target.value })
-    };
-   // ***************axios*********************************
- 
+function CreateBirths({ setLoading, cowId, refresh, setRefresh }) {
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const [births, setBirths] = useState({ date: "" });
+
+  const handleChangeDate = (e) => {
+    setBirths({ ...births, date: e.target.value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
-    const { date} = births;
+    setLoading(true);
+    const { date } = births;
     const url = `${BACKEND_URL}/births/`;
-    
-    axios.post(url, {
-        cow :cowId,
+
+    axios
+      .post(url, {
+        cow: cowId,
         birth_date: new Date(date),
-         
       })
       .then((response) => {
-        refresh ? setRefresh(false) : setRefresh(true)
-        setBirths({ date : "" })
-        
+        refresh ? setRefresh(false) : setRefresh(true);
+        setBirths({ date: "" });
 
         if (response.status === 500) {
         } else if (response.status === 200 && response.data.status === 200) {
@@ -48,40 +42,42 @@ function CreateBirths({loading,setLoading, cowId, refresh, setRefresh }) {
         }
       })
       .catch((err) => console.warn(err));
-     
-    console.log("submit");
-  }
-    
+  };
+
   return (
     <div>
-     <Button variant="primary" onClick={handleShow}>
+      <Button variant="primary" onClick={handleShow}>
         +
       </Button>
 
-      <Modal  show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Ajouter la date de naissance</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={handleSubmit} >
+          <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Label>Date</Form.Label>
-              <Form.Control value={births.date} onChange={handleChangeDate}  type="date"  />
+              <Form.Control
+                value={births.date}
+                onChange={handleChangeDate}
+                type="date"
+              />
             </Form.Group>
 
             <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose} >
+              <Button variant="secondary" onClick={handleClose}>
                 Fermer
               </Button>
               <Button variant="primary" onClick={handleClose} type="submit">
                 Valider
               </Button>
             </Modal.Footer>
-          </Form >
+          </Form>
         </Modal.Body>
       </Modal>
     </div>
-  )
+  );
 }
 
-export default CreateBirths
+export default CreateBirths;

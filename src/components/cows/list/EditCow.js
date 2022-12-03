@@ -7,7 +7,8 @@ import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 function EditCowsComponent({
-  loading,setLoading,
+  loading,
+  setLoading,
   refresh,
   setRefresh,
   id,
@@ -15,26 +16,22 @@ function EditCowsComponent({
   entryDate,
   breed,
 }) {
-  //  **************states*************
   const [cows, setCows] = useState({
     serial_number: "",
     entry_date: "",
     breed: "",
   });
-  
-  // ************statesForm********
+
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false)
-  ;
+  const handleClose = () => setShow(false);
   const handleShow = () => {
     setCows({
       serial_number: serialNumber,
       entry_date: entryDate,
       breed: breed,
-    })
-    setShow(true)
+    });
+    setShow(true);
   };
-  //  **************HandleFunction*************
 
   const onChangeSerialNumber = (e) => {
     setCows({ ...cows, serial_number: e.target.value });
@@ -46,10 +43,9 @@ function EditCowsComponent({
     setCows({ ...cows, breed: e.target.value });
   };
 
-  //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const { serial_number, entry_date, breed } = cows;
     const url = `${BACKEND_URL}/cows/${id}`;
 
@@ -61,8 +57,7 @@ function EditCowsComponent({
       })
       .then((response) => {
         refresh ? setRefresh(false) : setRefresh(true);
-        console.log("refresh");
-        
+
         if (response.status === 500) {
         } else if (response.status === 200 && response.data.status === 200) {
         } else if (response.status === 200 && response.data.status !== 200) {
@@ -78,9 +73,16 @@ function EditCowsComponent({
     console.log("submit");
   };
 
-  const entryDateObj = new Date(cows.entry_date)
-  const formattedDate = `${entryDateObj.getFullYear()}-${entryDateObj.getMonth() < 10 ? `0${entryDateObj.getMonth() + 1}` : entryDateObj.getMonth() + 1}-${entryDateObj.getDate() < 10 ? `0${entryDateObj.getDate()}` : entryDateObj.getDate()}`
-  console.log(entryDateObj.getDate())
+  const entryDateObj = new Date(cows.entry_date);
+  const formattedDate = `${entryDateObj.getFullYear()}-${
+    entryDateObj.getMonth() < 10
+      ? `0${entryDateObj.getMonth() + 1}`
+      : entryDateObj.getMonth() + 1
+  }-${
+    entryDateObj.getDate() < 10
+      ? `0${entryDateObj.getDate()}`
+      : entryDateObj.getDate()
+  }`;
   return (
     <div>
       <Button
@@ -120,7 +122,7 @@ function EditCowsComponent({
               value={cows.breed}
               onChange={onChangeBreed}
             >
-              <option >Selectionner la race</option>
+              <option>Selectionner la race</option>
               <option value="montbéliarde">Montbéliarde</option>
               <option value="holstein">Holstein</option>
             </Form.Select>

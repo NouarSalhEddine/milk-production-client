@@ -5,9 +5,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { BACKEND_URL } from "../../config";
 
-function DeleteMilk({loading, setLoading, refresh,setRefresh,id}) {
+function DeleteMilk({ setLoading, refresh, setRefresh, id }) {
   const handleDelete = () => {
-    setLoading(true)
+    setLoading(true);
     axios
       .delete(`${BACKEND_URL}/milks/${id}`)
       .then((res) => {
@@ -24,4 +24,4 @@ function DeleteMilk({loading, setLoading, refresh,setRefresh,id}) {
     </div>
   );
 }
-export default DeleteMilk
+export default DeleteMilk;

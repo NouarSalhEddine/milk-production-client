@@ -6,9 +6,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { BACKEND_URL } from "../../config";
 
 function Births() {
-  // *********States*************
-
-  const [refresh, setRefresh] = useState(false);
+ 
   const [loading, setLoading] = useState(false);
   const [births, setBirths] = useState([
     {
@@ -19,11 +17,11 @@ function Births() {
   ]);
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
     const url = `${BACKEND_URL}/births`;
     axios.get(url).then((res) => {
       setBirths(res.data);
-      setLoading(false)
+      setLoading(false);
     });
   }, []);
 
@@ -40,45 +38,52 @@ function Births() {
           Accouchement
         </Card.Header>
         <Card.Body>
-          {births.length > 0 ? <Table striped>
-            <thead>
-              <tr>
-                <th>Date D'accouchement</th>
-                <th className="text-center">Vaches</th>
-              </tr>
-            </thead>
-            {loading ? (
-              <tbody>
+          {births.length > 0 ? (
+            <Table striped>
+              <thead>
                 <tr>
-                  <td colSpan={4} className="p-4 text-center">
-                    {" "}
-                    {" "}
-                    <Spinner animation="border" role="status">
-                      <span
-                        style={{}}
-                        className="d-flex justify-content-md-center visually-hidden"
-                      >
-                        Loading...
-                      </span>
-                    </Spinner>
-                  </td>
+                  <th>Date D'accouchement</th>
+                  <th className="text-center">Vaches</th>
                 </tr>
-              </tbody>
-            ) :
-              <tbody>
-                {births.map((birth, index) => {
-                  return (
-                    <tr key={index}>
-                      <td style={{ paddingLeft: "20px" }}>
-                        {new Date(birth.birth_date).toLocaleDateString()}
-                      </td>
-                      <td className="text-center">{birth.cow.serial_number}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>}
-          </Table> : <div style={{textAlign: 'center'}}>Aucune naissance disponible</div> }
-           
+              </thead>
+              {loading ? (
+                <tbody>
+                  <tr>
+                    <td colSpan={4} className="p-4 text-center">
+                      {" "}
+                      <Spinner animation="border" role="status">
+                        <span
+                          style={{}}
+                          className="d-flex justify-content-md-center visually-hidden"
+                        >
+                          Loading...
+                        </span>
+                      </Spinner>
+                    </td>
+                  </tr>
+                </tbody>
+              ) : (
+                <tbody>
+                  {births.map((birth, index) => {
+                    return (
+                      <tr key={index}>
+                        <td style={{ paddingLeft: "20px" }}>
+                          {new Date(birth.birth_date).toLocaleDateString()}
+                        </td>
+                        <td className="text-center">
+                          {birth.cow.serial_number}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              )}
+            </Table>
+          ) : (
+            <div style={{ textAlign: "center" }}>
+              Aucune naissance disponible
+            </div>
+          )}
         </Card.Body>
       </Card>
     </div>
