@@ -5,13 +5,14 @@ import EditMilk from "./EditMilk";
 import DeleteMilk from "./DeleteMilk";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 import { BACKEND_URL } from "../../config";
 
 function Milk() {
   // *********States*************
 
   const [refresh, setRefresh] = useState(false);
-  // const [id, setId] = useState('');
+  const [loading, setLoading] = useState(false);
   const [milk, setMilk] = useState([
     {
       id: "",
@@ -22,9 +23,11 @@ function Milk() {
   ]);
 
   useEffect(() => {
+    setLoading(true)
     const url = `${BACKEND_URL}/milks`;
     axios.get(url).then((res) => {
       setMilk(res.data);
+      setLoading(false)
     });
   }, [refresh]);
   
@@ -43,7 +46,7 @@ function Milk() {
           }}
         >
           Production du Lait Par Jour
-          <CreateMilk setRefresh={setRefresh} refresh={refresh}/>
+          <CreateMilk loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
        { milk.length > 0 ?  <Table striped>
@@ -54,20 +57,38 @@ function Milk() {
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
-            <tbody>
-              {milk.map((milk, index) => {
-                return (
-                  <tr key = {index}>
-                    <td>{ new Date(milk.production_date).toLocaleDateString()}</td>
-                    <td className=" fw-bold">{milk.quantity}   </td>
-                    <td className="d-flex justify-content-center align-items-center">
-                      <DeleteMilk id={milk.id} setRefresh={setRefresh} refresh={refresh} />
-                      <EditMilk  id={milk.id} setRefresh={setRefresh} refresh={refresh} />
-                    </td> 
-                  </tr>
-                );
-              })}
-            </tbody>
+            {loading ? 
+              <tbody>
+                <tr>
+                  <td colSpan={4} className="p-4 text-center">
+                    {" "}
+                    {" "}
+                    <Spinner animation="border" role="status">
+                      <span
+                        style={{}}
+                        className="d-flex justify-content-md-center visually-hidden"
+                      >
+                        Loading...
+                      </span>
+                    </Spinner>
+                  </td>
+                </tr>
+              </tbody>
+             :
+              <tbody>
+                {milk.map((milk, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{new Date(milk.production_date).toLocaleDateString()}</td>
+                      <td className=" fw-bold">{milk.quantity}   </td>
+                      <td className="d-flex justify-content-center align-items-center">
+                        <DeleteMilk id={milk.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} />
+                        <EditMilk id={milk.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>}
           </Table>  : <div style={{textAlign: 'center'}}>Aucune production disponible</div> }
         </Card.Body>
       </Card>

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function EditBirths({ birthDate, id, cowId, refresh, setRefresh }) {
+function EditBirths({ birthDate, id, cowId, loading,setLoading,refresh, setRefresh }) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [births, setBirths] = useState({ birth_date: "" });
@@ -22,7 +22,7 @@ function EditBirths({ birthDate, id, cowId, refresh, setRefresh }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+     setLoading(true)
     const url = `${BACKEND_URL}/births/${id}`;
 
     axios

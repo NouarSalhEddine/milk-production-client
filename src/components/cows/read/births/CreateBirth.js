@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
 
-function CreateBirths({ cowId, refresh, setRefresh }) {
+function CreateBirths({loading,setLoading, cowId, refresh, setRefresh }) {
     // ************statesForm********
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -23,6 +23,7 @@ function CreateBirths({ cowId, refresh, setRefresh }) {
  
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const { date} = births;
     const url = `${BACKEND_URL}/births/`;
     

@@ -3,11 +3,12 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 import { BACKEND_URL } from "../../config";
 
 
 function MedicalHistories() {
-
+  const [loading, setLoading] = useState(false);
   const [medicalHistories, setMedicalHistories] = useState([
     {
       id: "",
@@ -17,9 +18,11 @@ function MedicalHistories() {
     },
   ]);
   useEffect(() => {
+    setLoading(true)
     const url = BACKEND_URL
     axios.get(`${url}/medical_histories/`).then((res) => {
       setMedicalHistories(res.data);
+      setLoading(false)
     })
     
   }, []);
@@ -47,18 +50,36 @@ function MedicalHistories() {
                 
               </tr>
             </thead>
-            <tbody>
-            {medicalHistories.map((medical, index) => {
+            {loading ? (
+              <tbody>
+                <tr>
+                  <td colSpan={4} className="p-4 text-center">
+                    {" "}
+                    {" "}
+                    <Spinner animation="border" role="status">
+                      <span
+                        style={{}}
+                        className="d-flex justify-content-md-center visually-hidden"
+                      >
+                        Loading...
+                      </span>
+                    </Spinner>
+                  </td>
+                </tr>
+              </tbody>
+            ) :
+              <tbody>
+                {medicalHistories.map((medical, index) => {
               
-                return (
-                  <tr key = {index}>
-                    <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
-                    <td>{medical.sickeness} </td>
+                  return (
+                    <tr key={index}>
+                      <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
+                      <td>{medical.sickeness} </td>
 
-                  </tr>
-                );
-              })}
-            </tbody>
+                    </tr>
+                  );
+                })}
+              </tbody>}
           </Table> : <div style={{textAlign: 'center'}}>Aucune historique medical disponible</div> }
         </Card.Body>
       </Card>

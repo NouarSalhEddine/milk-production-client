@@ -13,12 +13,12 @@ const App = () => {
   return (
     <Router>
       <Topbar />
-      <div style={{}} className="App wrapper">
+      <div className="App wrapper">
         
         <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
         <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} />
       </div>
-      <footer className=" pt-4 text-center ">
+      <footer style={{paddingTop:"100px"}} className="  text-center ">
       <div > 
         <p>Projet réalisé par Nouar Salah Eddine - 2022 </p>
         <p>Les icones Milk production manager , sont prises sur fontAwesome.com</p>

@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { BACKEND_URL } from "../../config";
 import axios from "axios";
-function CreateMilk({ id, refresh, setRefresh }) {
+function CreateMilk({ id, loading, setLoading, refresh, setRefresh }) {
   // ******************state*********************
  const  [milk, setMilk] = useState({
     production_date: "",
@@ -28,6 +28,7 @@ function CreateMilk({ id, refresh, setRefresh }) {
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const {  production_date, quantity } = milk;
     const url = `${BACKEND_URL}/milks`;
 

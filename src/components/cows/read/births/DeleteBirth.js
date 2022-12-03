@@ -5,8 +5,9 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { BACKEND_URL } from "../../../../config";
 
-function DeleteBirths({ id, refresh, setRefresh }) {
+function DeleteBirths({loading,setLoading, id, refresh, setRefresh }) {
   const handleDelete = () => {
+    setLoading(true)
     axios
       .delete(`${BACKEND_URL}/births/${id}`)
       .then((res) => {

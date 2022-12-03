@@ -49,12 +49,12 @@ function Cow() {
     setLoading(true)
     axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
-      setLoading(false)
+      // setLoading(false)
     });
 
     axios.get(`${url}/medical_histories/cow/${cowId}`).then((res) => {
       setMedicalHistories(res.data);
-      setLoading(false)
+      // setLoading(false)
     })
     axios.get(`${url}/births/cow/${cowId}`).then((res) => {
       setBirths(res.data);
@@ -110,7 +110,7 @@ function Cow() {
           }}
         >
           Historique medicale
-          <CreateMedicalHistories cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
+          <CreateMedicalHistories cowId={cowId } loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
           {medicalHistories.length > 0 ? <Table striped>
@@ -127,8 +127,8 @@ function Cow() {
                   <tr key={index}>
                     <td>{new Date(medical.diagnosis_date).toLocaleDateString()}</td>
                     <td>{medical.sickeness} </td>
-                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} setRefresh={setRefresh} refresh={refresh} />
-                      <EditMedicalHistories sickenesse={medical.sickeness} diagnosisDate={medical.diagnosis_date } cowId={cowId} id={medical.id} setRefresh={setRefresh} refresh={refresh} /></td>
+                    <td className="d-flex justify-content-center align-items-center"> <DeleteMedicalHistories id={medical.id} loading={loading} setLoading={setLoading}setRefresh={setRefresh} refresh={refresh} />
+                      <EditMedicalHistories sickenesse={medical.sickeness} diagnosisDate={medical.diagnosis_date } cowId={cowId} id={medical.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} /></td>
                   </tr>
                 );
               })}
@@ -146,7 +146,7 @@ function Cow() {
           }}
         >
           Accouchement
-          <CreateBirths cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
+          <CreateBirths cowId={cowId } loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
         { births.length > 0 ? <Table striped>
@@ -164,8 +164,8 @@ function Cow() {
                     <td style={{paddingLeft: "10px"}}>{new Date(birth.birth_date).toLocaleDateString()}</td>
                     
                     <td className="d-flex justify-content-center align-items-center">
-                      <DeleteBirths id={birth.id} setRefresh={setRefresh} refresh={refresh} />
-                      <EditBirths birthDate={birth.birth_date} cowId={cowId} id={birth.id} setRefresh={setRefresh} refresh={refresh} />
+                      <DeleteBirths id={birth.id} loading={loading} setLoading={setLoading}setRefresh={setRefresh} refresh={refresh} />
+                      <EditBirths birthDate={birth.birth_date}loading={loading} setLoading={setLoading} cowId={cowId} id={birth.id} setRefresh={setRefresh} refresh={refresh} />
                     </td> 
                   </tr>
                 );

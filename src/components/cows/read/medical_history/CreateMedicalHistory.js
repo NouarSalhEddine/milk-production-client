@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function CreateMedicalHistories({ cowId,refresh,setRefresh}) {
+function CreateMedicalHistories({loading, setLoading, cowId,refresh,setRefresh}) {
   // ************statesForm********
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,6 +27,7 @@ function CreateMedicalHistories({ cowId,refresh,setRefresh}) {
  
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const { date, sickeness} = medical;
     const url = `${BACKEND_URL}/medical_histories/`;
     

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function EditMilk({id , refresh , setRefresh}) {
+function EditMilk({id ,loading, setLoading,  refresh , setRefresh}) {
   // ******************state*********************
   const  [milk, setMilk] = useState({
     production_date: "",
@@ -31,6 +31,7 @@ function EditMilk({id , refresh , setRefresh}) {
   //  **************axios*************
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const {  production_date, quantity } = milk;
    
 

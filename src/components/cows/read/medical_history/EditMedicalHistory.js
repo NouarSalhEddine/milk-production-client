@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id, refresh, setRefresh }) {
+function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id,loading,setLoading, refresh, setRefresh }) {
   
   const [show, setShow] = useState(false);
   const [medical, setMedical] = useState({ diagnosis_date: "", sickeness: "" });
@@ -30,6 +30,7 @@ function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id, refresh, set
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true)
     const { diagnosis_date, sickeness } = medical;
     const url = `${BACKEND_URL}/medical_histories/${id}`;
     axios
