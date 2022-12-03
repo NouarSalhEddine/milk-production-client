@@ -24,7 +24,15 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
       <Route exact path="/milk-production" element={<Milk />} />
       <Route exact path="/vaches/:id" element={<Cow />} />
       </Routes>
+    </div>
+    <footer className="text-center ">
+      <div > 
+        <p>Projet réalisé par Nouar Salah Eddine - 2022 </p>
+        <p>Les icones Milk production manager , sont prises sur fontAwesome.com</p>
+        
+        <small className="text-muted ">Copyright © 1992 - 2022 . Tous droits réservés.</small>
       </div>
+   </footer>
   </Container>
 );
 

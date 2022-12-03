@@ -5,9 +5,9 @@ import Navbar from 'react-bootstrap/Navbar';
 const Topbar = () => {
   return (
     <div>
-     <Navbar bg="dark">
+     <Navbar className="topbar">
         <Container>
-          <Navbar.Brand href="#home">Brand link</Navbar.Brand>
+          <Navbar.Brand className="text-light" href="#home">Acceuil</Navbar.Brand>
         </Container>
       </Navbar>
     </div>

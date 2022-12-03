@@ -14,11 +14,13 @@ body {
 a,
 a:hover,
 a:focus {
-  color: inherit;
+ 
   text-decoration: none;
   transition: all 0.3s;
 }
-
+a:hover {
+  color: #050a30 !important ;
+}
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -37,7 +39,7 @@ a:focus {
 }
 
 .sidebar-header {
-  background: #6d7fcc;
+  background: #7386d5;
 }
 
 .sidebar-header h3 {
@@ -51,17 +53,17 @@ a:focus {
 }
 
 .menu-open {
-  background: #6d7fcc;
+  background: #616bb4;
 }
 
 .nav-item:hover {
-  color: #7386d5;
+  color: #050a30 !important;
   background: #fff;
 }
 
 .items-menu {
   color: #fff;
-  background: #6d7fcc;
+  background: #050a30;
 }
 
 li a.dropdown-toggle::after {
@@ -80,6 +82,7 @@ li a.dropdown-toggle::after {
   display: none;
 }
 .side-menu {
+  color: white;
   height: calc(100vh - 130px);
   overflow-y: scroll;
 }
@@ -89,14 +92,22 @@ li a.dropdown-toggle::after {
 }
 
 .side-menu::-webkit-scrollbar-thumb {
-  background: #5466b3;
+  background:#050a30 !important;
   border-radius: 3px;
 }
 
 .side-menu::-webkit-scrollbar-thumb:hover {
-  background: #3a4c99;
+  background: #050a30 !important;
 }
 
+ .nav-link {
+  color: white ;
+  display: flex !important;
+  align-items: center !important;
+}
+.topbar {
+  background-color:#050a30 ;
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -131,4 +142,9 @@ li a.dropdown-toggle::after {
     position: relative;
     left: 68%;
   }
+}
+footer {
+  color: #fafafa;
+  background: #050a30;
+  font-size: 14px;
 }
