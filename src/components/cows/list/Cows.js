@@ -6,6 +6,7 @@ import CreateCowsComponent from "./CreateCow";
 import EditCowsComponent from "./EditCow";
 import DeleteCowsComponent from "./DeleteCow";
 import { BACKEND_URL } from "../../../config";
+import Spinner from 'react-bootstrap/Spinner';
 import { Navigate, useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 
@@ -13,7 +14,7 @@ function Cows() {
   const navigate = useNavigate();
 
   // *********States*************
-
+  const [loading, setLoading] = useState(false)
   const [refresh, setRefresh] = useState(false);
   // const [id, setId] = useState('');
   const [addCows, setAddCows] = useState([
@@ -47,7 +48,9 @@ function Cows() {
           }}
         >
           Cliquer sur la vache pour ajouter/modifier l'historique medicale ou naissances
-          <CreateCowsComponent refresh={refresh} setRefresh={setRefresh} />
+         
+          <CreateCowsComponent loading={loading} setLoading={setLoading} refresh={refresh} setRefresh={setRefresh} />
+          
         </Card.Header>
         <Card.Body>
          
@@ -60,38 +63,42 @@ function Cows() {
                 <th>Actions</th>
               </tr>
             </thead>
-             <tbody>
-              {addCows.map((cow, index) => {
-                const entryDate = new Date(cow.entry_date).toLocaleDateString();
-                return (
-                  <tr
-                    key={index}
+            {loading ? <tr> Chargement <Spinner animation="border" role="status">
+      <span className=" visually-hidden">Loading...</span>
+    </Spinner></tr>:
+              <tbody>
+                {addCows.map((cow, index) => {
+                  const entryDate = new Date(cow.entry_date).toLocaleDateString();
+                  return (
+                    <tr
+                      key={index}
                    
-                    style={{ cursor: "pointer" }}
-                  >
-                    <td  onClick={() => openCow(cow.id)} style={{ fontWeight: "bold" }}>{cow.serial_number} </td>
-                    <td  onClick={() => openCow(cow.id)} >{entryDate}</td>
-                    <td  onClick={() => openCow(cow.id)} >{cow.breed}</td>
-                    <td  style={{ cursor: "auto" }} className="d-flex justify-content-center align-items-center">
-                      <DeleteCowsComponent
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        id={cow.id}
-                      />
-                      <EditCowsComponent
-                        serialNumber={cow.serial_number}
-                        entryDate={cow.entry_date}
-                        breed={cow.breed}
-                        setRefresh={setRefresh}
-                        refresh={refresh}
-                        id={cow.id}
-                      />
-                    </td>
-                  </tr>
+                      style={{ cursor: "pointer" }}
+                    >
+                      <td onClick={() => openCow(cow.id)} style={{ fontWeight: "bold" }}>{cow.serial_number} </td>
+                      <td onClick={() => openCow(cow.id)} >{entryDate}</td>
+                      <td onClick={() => openCow(cow.id)} >{cow.breed}</td>
+                      <td style={{ cursor: "auto" }} className="d-flex justify-content-center align-items-center">
+                        <DeleteCowsComponent
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          id={cow.id}
+                        />
+                        <EditCowsComponent
+                          serialNumber={cow.serial_number}
+                          entryDate={cow.entry_date}
+                          breed={cow.breed}
+                          setRefresh={setRefresh}
+                          refresh={refresh}
+                          id={cow.id}
+                        />
+                      </td>
+                    </tr>
                  
-                );
-              })}
-            </tbody>
+                  );
+                })}
+              </tbody>
+            }
           </Table> : <div style={{textAlign: 'center'}}>Aucune vache disponible</div> }
         </Card.Body>
       </Card>

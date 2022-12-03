@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Toast from 'react-bootstrap/Toast';
 
-function CreateCowsComponent({ refresh, setRefresh }) {
+function CreateCowsComponent({ loading,setLoading ,refresh, setRefresh }) {
   //  **************states*************
   const [cows, setCows] = useState({
     serial_number: "",
@@ -38,7 +38,7 @@ function CreateCowsComponent({ refresh, setRefresh }) {
     e.preventDefault();
     const { serial_number, entry_date, breed } = cows;
     const url = `${BACKEND_URL}/cows`;
-
+    setLoading(true)
     axios
       .post(url, {
         serial_number,
@@ -54,15 +54,8 @@ function CreateCowsComponent({ refresh, setRefresh }) {
           entry_date: "",
           breed: "",
         });
-        if (response.status === 500) {
-        } else if (response.status === 200 && response.data.status === 200) {
-        } else if (response.status === 200 && response.data.status !== 200) {
-          console.log(
-            "Error inserted new data because : " + response.data.message
-          );
-        } else {
-          console.log("Server error with : " + response.data);
-        }
+        setLoading(false)
+        
       })
       .catch((err) => console.warn(err));
 
@@ -91,52 +84,53 @@ function CreateCowsComponent({ refresh, setRefresh }) {
       <Button variant="primary" onClick={handleShow}>
         +
       </Button>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Ajouter Une Vache</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>numero de serie :</Form.Label>
-              <Form.Control
+      
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Ajouter Une Vache</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>numero de serie :</Form.Label>
+                <Form.Control
                
-                onChange={onChangeSerialNumber}
-                type="number"
-              />
-            </Form.Group>
-            <Form.Group controlId="dateEntry">
-              <Form.Label>date d'entrer :</Form.Label>
-              <Form.Control
+                  onChange={onChangeSerialNumber}
+                  type="number"
+                />
+              </Form.Group>
+              <Form.Group controlId="dateEntry">
+                <Form.Label>date d'entrer :</Form.Label>
+                <Form.Control
                 
-                type="date"
-                onChange={onChangeDateEntry}
-              />
-            </Form.Group>
+                  type="date"
+                  onChange={onChangeDateEntry}
+                />
+              </Form.Group>
 
-            <Form.Label>Races :</Form.Label>
-            <Form.Select
-              aria-label="Default select example"
+              <Form.Label>Races :</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
               
-              onChange={onChangeBreed}
-            >
-              <option  >Selectionner la race</option>
-              <option value="montbéliarde">Montbéliarde</option>
-              <option value="holstein">Holstein</option>
-            </Form.Select>
+                onChange={onChangeBreed}
+              >
+                <option  >Selectionner la race</option>
+                <option value="montbéliarde">Montbéliarde</option>
+                <option value="holstein">Holstein</option>
+              </Form.Select>
 
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Fermer
-              </Button>
-              <Button variant="primary" onClick={handleClose} type="submit">
-                Valider
-              </Button>
-            </Modal.Footer>
-          </Form>
-        </Modal.Body>
-      </Modal>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={handleClose}>
+                  Fermer
+                </Button>
+                <Button variant="primary" onClick={handleClose} type="submit">
+                  Valider
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal.Body>
+        </Modal>
+     
     </div>
   );
 }

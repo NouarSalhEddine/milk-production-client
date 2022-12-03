@@ -40,7 +40,7 @@ const SideBar = ({ isOpen, toggle }) => (
         <NavItem>
           <NavLink tag={Link} to={"/births"}>
             <FontAwesomeIcon icon={faBaby} className="p-2" />
-            Naissances
+            Accouchement
           </NavLink>
         </NavItem>
         <NavItem></NavItem>

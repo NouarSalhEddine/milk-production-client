@@ -119,14 +119,14 @@ function Cow() {
             alignItems: "center",
           }}
         >
-          Naissances
+          Accouchement
           <CreateBirths cowId={cowId } setRefresh={setRefresh} refresh={refresh}/>
         </Card.Header>
         <Card.Body>
         { births.length > 0 ? <Table striped>
             <thead>
               <tr>
-                <th>Date de Naissance</th>
+                <th>Date de D'accouchement</th>
                 <th className="text-right">Actions</th>
               </tr>
             </thead>

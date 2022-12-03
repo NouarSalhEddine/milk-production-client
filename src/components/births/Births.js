@@ -34,13 +34,13 @@ function Births() {
             alignItems: "center",
           }}
         >
-          Naissances
+          Accouchement
         </Card.Header>
         <Card.Body>
           {births.length > 0 ? <Table striped>
             <thead>
               <tr>
-                <th>Date de Naissance</th>
+                <th>Date D'accouchement</th>
                 <th className="text-center">Vaches</th>
               </tr>
             </thead>
