@@ -46,14 +46,17 @@ function Cow() {
     setLoading(true);
     axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
+      res.data.sort(({serial_number: a}, {serial_number: b}) => new Date(b) - new Date(a))
     });
 
     axios.get(`${url}/medical_histories/cow/${cowId}`).then((res) => {
       setMedicalHistories(res.data);
+      res.data.sort(({diagnosis_date: a}, {diagnosis_date: b}) => new Date(b) - new Date(a))
     });
     axios.get(`${url}/births/cow/${cowId}`).then((res) => {
       setBirths(res.data);
       setLoading(false);
+      res.data.sort(({birth_date: a}, {birth_date: b}) => new Date(b) - new Date(a))
     });
   }, [refresh]);
 

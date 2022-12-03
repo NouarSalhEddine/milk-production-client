@@ -18,15 +18,18 @@ function Milk() {
       quantity: "",
     },
   ]);
-
+ 
   useEffect(() => {
+    
     setLoading(true);
     const url = `${BACKEND_URL}/milks`;
     axios.get(url).then((res) => {
+      res.data.sort(({production_date: a}, {production_date: b}) => new Date(b) - new Date(a))
       setMilk(res.data);
       setLoading(false);
     });
   }, [refresh]);
+ 
 
   return (
     <div>

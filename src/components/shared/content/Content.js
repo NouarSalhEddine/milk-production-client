@@ -7,15 +7,16 @@ import MedicalHistories from "../../medical_histories/MedicalHistories";
 import Births from "../../births/Births";
 import Milk from "../../milk/Milk";
 import Cow from "../../cows/read/ReadCow";
-import Topbar from "./Topbar";
+import logo from "../sidebar/logo.png"
+
 
 const Content = ({ sidebarIsOpen, toggleSidebar }) => (
   <Container
     className= {classNames({ "is-open": sidebarIsOpen })}
-    style={{padding: '50px'}}
+    style={{padding: '20px 50px 50px 50px'}}
   >
-    
-    
+    <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}><img style={{ width: "250px", height: "160px" }} src={logo} alt="logo" />
+</div>
     <Routes >
       <Route exact path="/" element={<Navigate replace to="/cows" />}/>
       <Route exact path="/cows" element={<Cows />} />

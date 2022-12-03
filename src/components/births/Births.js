@@ -22,6 +22,7 @@ function Births() {
     axios.get(url).then((res) => {
       setBirths(res.data);
       setLoading(false);
+      res.data.sort(({birth_date: a}, {birth_date: b}) => new Date(b) - new Date(a))
     });
   }, []);
 

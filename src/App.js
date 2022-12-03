@@ -18,7 +18,7 @@ const App = () => {
         <SideBar toggle={toggleSidebar} isOpen={sidebarIsOpen} />
         <Content toggleSidebar={toggleSidebar} sidebarIsOpen={sidebarIsOpen} />
       </div>
-      <footer style={{paddingTop:"100px"}} className="  text-center ">
+      <footer style={{padding:"30px"}} className="  text-center ">
       <div > 
         <p>Projet réalisé par Nouar Salah Eddine - 2022 </p>
         <p>Les icones Milk production manager , sont prises sur fontAwesome.com</p>

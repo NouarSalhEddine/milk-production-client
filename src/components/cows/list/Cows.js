@@ -31,6 +31,7 @@ function Cows() {
     axios.get(url).then((res) => {
       setAddCows(res.data);
       setLoading(false);
+      res.data.sort(({serial_number: a}, {serial_number: b}) => new Date(b) - new Date(a))
     });
   }, [refresh]);
 

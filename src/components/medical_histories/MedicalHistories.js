@@ -21,6 +21,7 @@ function MedicalHistories() {
     axios.get(`${url}/medical_histories/`).then((res) => {
       setMedicalHistories(res.data);
       setLoading(false);
+      res.data.sort(({diagnosis_date: a}, {diagnosis_date: b}) => new Date(b) - new Date(a))
     });
   }, []);
 
@@ -44,6 +45,7 @@ function MedicalHistories() {
           <Table striped>
             <thead>
               <tr>
+                <th>Vaches</th>
                 <th>Date de Diagnostic</th>
                 <th>Maladie</th>
               </tr>
@@ -69,6 +71,7 @@ function MedicalHistories() {
                 {medicalHistories.map((medical, index) => {
                   return (
                     <tr key={index}>
+                      <td>{medical.cow.serial_number}</td>
                       <td>
                         {new Date(medical.diagnosis_date).toLocaleDateString()}
                       </td>

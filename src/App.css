@@ -39,7 +39,7 @@ a:hover {
 }
 
 .sidebar-header {
-  background: #7386d5;
+  background: #050a30;
 }
 
 .sidebar-header h3 {
@@ -144,7 +144,7 @@ li a.dropdown-toggle::after {
   }
 }
 footer {
-  color: #050a30;
-  background:#D9D9D9 ;
+  color: #D9D9D9;
+  background: #050a30 ;
   font-size: 14px;
 }
