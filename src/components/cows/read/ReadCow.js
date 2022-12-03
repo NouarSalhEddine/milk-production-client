@@ -46,7 +46,6 @@ function Cow() {
     setLoading(true);
     axios.get(`${url}/cows/${cowId}`).then((res) => {
       setCow(res.data);
-      res.data.sort(({serial_number: a}, {serial_number: b}) => new Date(b) - new Date(a))
     });
 
     axios.get(`${url}/medical_histories/cow/${cowId}`).then((res) => {
@@ -79,11 +78,11 @@ function Cow() {
           <Card>
             <Card.Header>Information</Card.Header>
             <Card.Body>
-              Numero de serie: {cow.serial_number}
-              <br />
-              Race: {cow.breed}
-              <br />
-              Date d'entree: {entry_date}
+             Numero de serie: <span className="fw-bold  px-3"> {cow.serial_number}</span>
+              <br /><hr />
+              Race:<span className="fw-bold px-3">{cow.breed}</span>
+              <br /><hr />
+              Date d'entree:<span className="fw-bold  px-3"> {entry_date}</span>
             </Card.Body>
           </Card>
 
@@ -180,7 +179,7 @@ function Cow() {
                   <thead>
                     <tr>
                       <th>Date de D'accouchement</th>
-                      <th className="text-right">Actions</th>
+                      <th className="text-center">Actions</th>
                     </tr>
                   </thead>
                   <tbody>

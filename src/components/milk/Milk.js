@@ -36,6 +36,7 @@ function Milk() {
       <Card style={{ marginTop: "2rem" }}>
         <Card.Header
           style={{
+            fontWeight:"bold",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -56,7 +57,7 @@ function Milk() {
                 <tr>
                   <th>Date de Production</th>
                   <th>
-                    Quentité <span className=" font-weight-light ">L/Jour</span>
+                    Quentité <span className=" text-center font-weight-light ">L/Jour</span>
                   </th>
                   <th className="text-center">Actions</th>
                 </tr>
@@ -85,7 +86,7 @@ function Milk() {
                         <td>
                           {new Date(milk.production_date).toLocaleDateString()}
                         </td>
-                        <td className=" fw-bold">{milk.quantity} </td>
+                        <td className=" fw-bold ">{milk.quantity} </td>
                         <td className="d-flex justify-content-center align-items-center">
                           <DeleteMilk
                             id={milk.id}

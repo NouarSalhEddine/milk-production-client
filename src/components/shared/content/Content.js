@@ -7,7 +7,6 @@ import MedicalHistories from "../../medical_histories/MedicalHistories";
 import Births from "../../births/Births";
 import Milk from "../../milk/Milk";
 import Cow from "../../cows/read/ReadCow";
-import logo from "../sidebar/logo.png"
 
 
 const Content = ({ sidebarIsOpen, toggleSidebar }) => (
@@ -15,8 +14,9 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
     className= {classNames({ "is-open": sidebarIsOpen })}
     style={{padding: '20px 50px 50px 50px'}}
   >
-    <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}><img style={{ width: "250px", height: "160px" }} src={logo} alt="logo" />
+    <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}><img style={{ width: "130px" }} src="/cow.png" alt="logo" />
 </div>
+      <hr className=" fw-bold "/>
     <Routes >
       <Route exact path="/" element={<Navigate replace to="/cows" />}/>
       <Route exact path="/cows" element={<Cows />} />

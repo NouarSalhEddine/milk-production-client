@@ -29,12 +29,13 @@ function MedicalHistories() {
     <Card style={{ marginTop: "2rem" }}>
       <Card.Header
         style={{
+          fontWeight:"bold",
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
         }}
       >
-        Historique medicale
+        Informations
       </Card.Header>
       <Card.Body>
         <div style={{ marginBottom: "10px" }}>
@@ -71,7 +72,7 @@ function MedicalHistories() {
                 {medicalHistories.map((medical, index) => {
                   return (
                     <tr key={index}>
-                      <td>{medical.cow.serial_number}</td>
+                      <td className="fw-bold text-danger">{medical.cow.serial_number}</td>
                       <td>
                         {new Date(medical.diagnosis_date).toLocaleDateString()}
                       </td>

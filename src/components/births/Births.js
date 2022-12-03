@@ -31,14 +31,19 @@ function Births() {
       <Card style={{ marginTop: "2rem" }}>
         <Card.Header
           style={{
+            fontWeight:"bold",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
           }}
         >
-          Accouchement
+          Informations
         </Card.Header>
         <Card.Body>
+        <div style={{ marginBottom: "10px" }}>
+          Pour ajouter une nouvelle date d'accouchement, veuillez cliquer sur le
+          menu Vache et selectionner une vache
+        </div>
           {births.length > 0 ? (
             <Table striped>
               <thead>
@@ -68,10 +73,10 @@ function Births() {
                   {births.map((birth, index) => {
                     return (
                       <tr key={index}>
-                        <td style={{ paddingLeft: "20px" }}>
+                        <td  style={{ paddingLeft: "20px" }}>
                           {new Date(birth.birth_date).toLocaleDateString()}
                         </td>
-                        <td className="text-center">
+                        <td className="fw-bold text-danger text-center">
                           {birth.cow.serial_number}
                         </td>
                       </tr>
