@@ -83,7 +83,7 @@ function Milk() {
                       <td className=" fw-bold">{milk.quantity}   </td>
                       <td className="d-flex justify-content-center align-items-center">
                         <DeleteMilk id={milk.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} />
-                        <EditMilk id={milk.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} />
+                        <EditMilk productionDate={milk.production_date} quantity={milk.quantity} id={milk.id} loading={loading} setLoading={setLoading} setRefresh={setRefresh} refresh={refresh} />
                       </td>
                     </tr>
                   );

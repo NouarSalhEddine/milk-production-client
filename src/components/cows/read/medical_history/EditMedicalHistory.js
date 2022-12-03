@@ -6,31 +6,37 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { BACKEND_URL } from "../../../../config";
 import axios from "axios";
-function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id,loading,setLoading, refresh, setRefresh }) {
-  
+function EditMedicalHistories({
+  sickenesse,
+  diagnosisDate,
+  cowId,
+  id,
+  loading,
+  setLoading,
+  refresh,
+  setRefresh,
+}) {
   const [show, setShow] = useState(false);
   const [medical, setMedical] = useState({ diagnosis_date: "", sickeness: "" });
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setMedical({
       diagnosis_date: diagnosisDate,
-      sickeness: sickenesse 
-    })
-    setShow(true)
+      sickeness: sickenesse,
+    });
+    setShow(true);
   };
- 
+
   const handleChangeDate = (e) => {
-    setMedical({ ...medical, date: e.target.value });
+    setMedical({ ...medical, diagnosis_date: e.target.value });
   };
   const handleChangeSicknesse = (e) => {
     setMedical({ ...medical, sickeness: e.target.value });
   };
 
-  // ***************axios*********************************
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     const { diagnosis_date, sickeness } = medical;
     const url = `${BACKEND_URL}/medical_histories/${id}`;
     axios
@@ -74,9 +80,9 @@ function EditMedicalHistories({ sickenesse,diagnosisDate,cowId, id,loading,setLo
             <Form.Group className="mb-3">
               <Form.Label>Date de Diagnostic</Form.Label>
               <Form.Control
-                value={formattedDate}
-                onChange={handleChangeDate}
                 type="date"
+                onChange={handleChangeDate}
+                defaultValue={formattedDate}
               />
             </Form.Group>
 

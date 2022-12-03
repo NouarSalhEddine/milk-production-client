@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
-function EditMilk({id ,loading, setLoading,  refresh , setRefresh}) {
+function EditMilk({id ,productionDate,quantity, setLoading,  refresh , setRefresh}) {
   // ******************state*********************
   const  [milk, setMilk] = useState({
-    production_date: "",
-    quantity : ""
+    production_date: productionDate,
+    quantity : quantity
  })
   // ************statesForm********
   const [show, setShow] = useState(false);
@@ -62,7 +62,16 @@ function EditMilk({id ,loading, setLoading,  refresh , setRefresh}) {
 
     console.log("submit");
   };
-  //  **************axios*************
+  const entryDateObj = new Date(milk.production_date);
+  const formattedDate = `${entryDateObj.getFullYear()}-${
+    entryDateObj.getMonth() < 10
+      ? `0${entryDateObj.getMonth() + 1}`
+      : entryDateObj.getMonth() + 1
+  }-${
+    entryDateObj.getDate() < 10
+      ? `0${entryDateObj.getDate()}`
+      : entryDateObj.getDate()
+  }`;
   return (
 
     <div>
@@ -83,7 +92,7 @@ function EditMilk({id ,loading, setLoading,  refresh , setRefresh}) {
           <Form onSubmit={handleSubmit} >
             <Form.Group className="mb-3">
               <Form.Label>Date de production</Form.Label>
-              <Form.Control value={milk.production_date} onChange={handleChangeDate}  type="date"  />
+              <Form.Control defaultValue={formattedDate} onChange={handleChangeDate}  type="date"  />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>quantity :</Form.Label>
