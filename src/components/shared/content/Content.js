@@ -16,7 +16,6 @@ const Content = ({ sidebarIsOpen, toggleSidebar }) => (
   >
     <div style={{ width: '100%', display: 'flex', justifyContent: 'flex-end', marginBottom: '20px' }}><img style={{ width: "130px" }} src="/cow.png" alt="logo" />
 </div>
-      <hr className=" fw-bold "/>
     <Routes >
       <Route exact path="/" element={<Navigate replace to="/cows" />}/>
       <Route exact path="/cows" element={<Cows />} />

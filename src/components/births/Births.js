@@ -76,7 +76,7 @@ function Births() {
                         <td  style={{ paddingLeft: "20px" }}>
                           {new Date(birth.birth_date).toLocaleDateString()}
                         </td>
-                        <td className="fw-bold text-danger text-center">
+                        <td className="fw-bold  text-center">
                           {birth.cow.serial_number}
                         </td>
                       </tr>

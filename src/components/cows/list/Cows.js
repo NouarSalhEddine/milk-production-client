@@ -94,7 +94,7 @@ function Cows() {
                     return (
                       <tr key={index} style={{ cursor: "pointer" }}>
                         <td
-                          className="text-danger"
+                          className=""
                           onClick={() => openCow(cow.id)}
                           style={{ fontWeight: "bold" }}
                         >

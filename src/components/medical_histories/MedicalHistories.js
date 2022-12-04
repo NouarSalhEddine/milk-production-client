@@ -72,7 +72,7 @@ function MedicalHistories() {
                 {medicalHistories.map((medical, index) => {
                   return (
                     <tr key={index}>
-                      <td className="fw-bold text-danger">{medical.cow.serial_number}</td>
+                      <td className="fw-bold ">{medical.cow.serial_number}</td>
                       <td>
                         {new Date(medical.diagnosis_date).toLocaleDateString()}
                       </td>
